@@ -44,7 +44,7 @@
             android:backgroundTint="@color/black"
             app:cardCornerRadius="8dp">
 
-            <com.example.martin.playingcards.utils.MyEditText
+            <com.example.martin.shelem.utils.MyEditText
                 android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -99,7 +99,7 @@
             android:layout_below="@id/container_et_username"
             app:cardCornerRadius="8dp">
 
-            <com.example.martin.playingcards.utils.MyEditText
+            <com.example.martin.shelem.utils.MyEditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

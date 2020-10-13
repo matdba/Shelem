@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.martin.playingcards">
+    package="com.example.martin.shelem">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,27 +17,27 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
 
-        <service android:name=".services.ClosingLobby" android:stopWithTask="false"/>
+        <service android:name="com.example.martin.shelem.services.ClosingLobby" android:stopWithTask="false"/>
 
 
 
-        <activity android:name=".activities.LoginSignupActivity">
+        <activity android:name="com.example.martin.shelem.activities.LoginSignupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.DashboardActivity"/>
+        <activity android:name="com.example.martin.shelem.activities.DashboardActivity"/>
 
-        <activity android:name=".activities.LobbyActivity"/>
+        <activity android:name="com.example.martin.shelem.activities.LobbyActivity"/>
 
-        <activity android:name=".activities.ProfileActivity"/>
+        <activity android:name="com.example.martin.shelem.activities.ProfileActivity"/>
 
-        <activity android:name=".activities.GameScreenActivity">
+        <activity android:name="com.example.martin.shelem.activities.GameScreenActivity">
         </activity>
 
-        <activity android:name=".activities.RoomsActivity"/>
+        <activity android:name="com.example.martin.shelem.activities.RoomsActivity"/>
 
     </application>
 

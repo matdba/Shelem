@@ -267,7 +267,7 @@
         android:layout_marginRight="8dp"/>
 
 
-    <com.example.martin.playingcards.customViews.CircularProgressBar
+    <com.example.martin.shelem.customViews.CircularProgressBar
         android:id="@+id/progress_timer"
         android:layout_width="50dp"
         android:layout_height="50dp"
