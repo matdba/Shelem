@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/container_header"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:backgroundTint="@color/blue"
+        app:cardCornerRadius="16dp"
+        android:layout_marginTop="-16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_back_white"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Room"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:fontFamily="@font/baloobhai_regular"
+                android:layout_toRightOf="@id/img_back"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                />
+
+
+        </RelativeLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/lbl_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Points"
+        android:layout_below="@id/container_header"
+        android:textSize="24dp"
+        android:layout_marginTop="48dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/baloobhai_regular"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/container_points"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/lbl_points">
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_300_point"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="300"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/baloobhai_regular"
+            android:textColor="@color/black"
+            android:background="@color/yellow"
+            app:carbon_cornerRadius="8dp"
+            />
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_600_point"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="600"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/baloobhai_regular"
+            android:textColor="@color/black"
+            android:background="@drawable/background_border_4dp_yellow_corner_8dp"
+            android:layout_marginLeft="16dp"
+            />
+
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_900_point"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="900"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/baloobhai_regular"
+            android:textColor="@color/black"
+            android:background="@drawable/background_border_4dp_yellow_corner_8dp"
+            android:layout_marginLeft="16dp"
+            />
+
+
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/lbl_joker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Joker"
+        android:layout_below="@id/container_points"
+        android:textSize="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/baloobhai_regular"
+        android:textColor="@color/black" />
+
+
+
+    <LinearLayout
+        android:id="@+id/container_joker"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/lbl_joker">
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_joker_on"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="On"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/baloobhai_regular"
+            android:textColor="@color/black"
+            android:background="@color/carbon_lightGreen_a400"
+            app:carbon_cornerRadius="8dp"
+            />
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_joker_off"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Off"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/baloobhai_regular"
+            android:textColor="@color/black"
+            android:background="@drawable/background_border_4dp_red_corner_8dp"
+            android:layout_marginLeft="16dp"
+            />
+
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/lbl_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Minimum Level"
+        android:layout_below="@id/container_joker"
+        android:textSize="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/baloobhai_regular"
+        android:textColor="@color/black" />
+
+
+
+    <LinearLayout
+        android:id="@+id/container_level"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/lbl_level">
+
+
+        <carbon.widget.ImageView
+            android:id="@+id/btn_subtract_level"
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_minus" />
+
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_min_level"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="1"
+            android:textSize="32dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/baloobhai_regular"
+            android:textColor="@color/blue"
+            />
+
+
+        <carbon.widget.ImageView
+            android:id="@+id/btn_add_level"
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_plus" />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+    <carbon.widget.ImageView
+        android:id="@+id/btn_create_room"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:srcCompat="@drawable/ic_tick"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        app:carbon_cornerRadius="35dp"
+        app:carbon_elevation="12dp"
+        app:carbon_elevationShadowColor="@color/carbon_lightGreen_a700"/>
+
+
+
+
+
+
+</RelativeLayout>

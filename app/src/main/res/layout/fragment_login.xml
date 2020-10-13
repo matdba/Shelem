@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow"
+    app:carbon_cornerRadius="28dp"
+    android:elevation="12dp"
+    android:layout_marginTop="12dp"
+    app:carbon_elevationShadowColor="@color/black"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+
+        <TextView
+            android:id="@+id/lbl_login"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="Log In"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="32dp"
+            android:fontFamily="@font/baloobhai_regular"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            />
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/container_et_username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:layout_below="@id/lbl_login"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
+            android:backgroundTint="@color/black"
+            app:cardCornerRadius="8dp">
+
+            <com.example.martin.playingcards.utils.MyEditText
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:hint="username"
+                android:maxLines="1"
+                android:maxLength="20"
+                android:inputType="text|textNoSuggestions"
+                android:textSize="16dp"
+                android:textColorHint="@color/light_grey"
+                android:textColor="@color/white"
+                android:fontFamily="@font/baloobhai_regular"
+                android:background="@drawable/background_et_focus_on_solid_blue_corner_8dp"/>
+
+
+            <ImageView
+                android:id="@+id/img_error_et_username"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/ic_error"
+                android:visibility="invisible"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="8dp"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="username or password is worng"
+            android:textSize="14dp"
+            android:layout_below="@id/btn_forget_password"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/orange"
+            android:visibility="invisible"
+            android:fontFamily="@font/baloobhai_regular"/>
+
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/container_et_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
+            android:backgroundTint="@color/black"
+            android:layout_below="@id/container_et_username"
+            app:cardCornerRadius="8dp">
+
+            <com.example.martin.playingcards.utils.MyEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:hint="password"
+                android:maxLines="1"
+                android:maxLength="20"
+                android:textSize="16dp"
+                android:inputType="textPassword|textNoSuggestions"
+                android:textColor="@color/white"
+                android:textColorHint="@color/light_grey"
+                android:fontFamily="@font/baloobhai_regular"
+                android:background="@drawable/background_et_focus_on_solid_blue_corner_8dp"/>
+
+
+            <ImageView
+                android:id="@+id/img_error_et_password"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/ic_error"
+                android:visibility="invisible"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="8dp"/>
+
+
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/btn_forget_password"
+            android:layout_width="220dp"
+            android:layout_height="32dp"
+            android:text="Forgot your password?"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:layout_below="@id/container_et_password"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/lapis_lazuli"
+            android:fontFamily="@font/baloobhai_regular"
+            android:layout_marginTop="16dp"
+            />
+
+        <carbon.widget.RelativeLayout
+            android:id="@+id/btn_login"
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/btn_forget_password"
+            android:background="@color/white"
+            android:layout_marginTop="32dp"
+            app:carbon_cornerRadius="8dp"
+            app:carbon_elevation="4dp"
+            app:carbon_elevationShadowColor="@color/blue">
+
+
+            <carbon.widget.TextView
+                android:id="@+id/txt_login"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="LOGIN"
+                android:layout_gravity="center"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:gravity="center"
+                android:fontFamily="@font/baloobhai_regular"/>
+
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/progress_login"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/btn_forget_password"
+                android:layout_centerInParent="true"
+                app:SpinKit_Color="@color/blue"
+                android:visibility="invisible"
+                style="@style/SpinKitView.Small.ChasingDots"
+                />
+
+
+
+        </carbon.widget.RelativeLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+</carbon.widget.RelativeLayout>

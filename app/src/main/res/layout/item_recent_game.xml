@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginLeft="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <RelativeLayout
+        android:id="@+id/layout_item_recent_game"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/background_recent_games_win"
+        >
+
+
+        <TextView
+            android:id="@+id/txt_time"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:text="2 Days ago"
+            android:fontFamily="@font/baloobhai_regular"
+            android:textSize="14dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:background="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-12dp"
+            />
+
+
+
+        <ImageView
+            android:id="@+id/img_condition"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/ic_win"
+            android:layout_below="@id/txt_time"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            />
+
+
+
+
+        <TextView
+            android:id="@+id/txt_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="335 - 135"
+            android:textColor="@color/green"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/img_condition"
+            android:fontFamily="@font/baloobhai_regular"
+            android:layout_centerHorizontal="true"/>
+
+
+
+
+        <ImageView
+            android:id="@+id/img_player_one"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/background_user_in_circle_room"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="32dp"
+            app:srcCompat="@drawable/avatar_21"/>
+
+
+
+
+        <ImageView
+            android:id="@+id/img_player_two"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/background_user_in_circle_room"
+            android:layout_toLeftOf="@id/img_player_one"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="32dp"
+            app:srcCompat="@drawable/avatar_15"/>
+
+
+
+
+        <ImageView
+            android:id="@+id/img_player_three"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/background_user_in_circle_room"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_toRightOf="@id/img_player_four"
+            app:srcCompat="@drawable/avatar_06"/>
+
+
+        <ImageView
+            android:id="@+id/img_player_four"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/background_user_in_circle_room"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            app:srcCompat="@drawable/avatar_01"/>
+
+
+
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_username_player_one"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="mosolini"
+            android:textSize="12dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/baloobhai_regular"
+            android:layout_below="@id/img_player_one"
+            android:gravity="center"
+            android:layout_alignLeft="@id/img_player_one"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginTop="4dp"/>
+
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_username_player_two"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="amir"
+            android:textSize="12dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/baloobhai_regular"
+            android:layout_below="@id/img_player_two"
+            android:gravity="center"
+            android:layout_alignLeft="@id/img_player_two"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginTop="4dp"/>
+
+
+
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_username_player_three"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="matin"
+            android:textSize="12dp"
+            android:textColor="@color/carbon_lightGreen_a400"
+            android:gravity="center"
+            android:fontFamily="@font/baloobhai_regular"
+            android:layout_below="@id/img_player_three"
+            android:layout_alignLeft="@id/img_player_three"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginTop="4dp"/>
+
+
+
+
+
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_username_player_four"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="amin"
+            android:textSize="12dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:fontFamily="@font/baloobhai_regular"
+            android:layout_below="@id/img_player_four"
+            android:layout_alignLeft="@id/img_player_four"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginTop="4dp"/>
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</carbon.widget.RelativeLayout>

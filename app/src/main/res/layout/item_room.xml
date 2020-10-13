@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    app:cardBackgroundColor="@color/black"
+    app:cardCornerRadius="32dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <carbon.widget.RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@color/white"
+        app:carbon_cornerRadius="32dp"
+        app:carbon_elevation="4dp"
+        app:carbon_elevationShadowColor="@color/blue">
+
+
+        <ImageView
+            android:id="@+id/img_player_one"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/background_user_in_circle_room"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/avatar_00"/>
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_username_player_four"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="empty"
+            android:textSize="12dp"
+            android:textColor="@color/grey"
+            android:fontFamily="@font/baloobhai_regular"
+            android:layout_below="@id/img_player_one"
+            android:gravity="center"
+            android:layout_alignLeft="@id/img_player_one"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginTop="4dp"/>
+
+        <ImageView
+            android:id="@+id/img_player_two"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/background_user_in_circle_room"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@id/img_player_one"
+            app:srcCompat="@drawable/avatar_00"/>
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_username_player_three"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="empty"
+            android:textSize="12dp"
+            android:textColor="@color/grey"
+            android:fontFamily="@font/baloobhai_regular"
+            android:layout_below="@id/img_player_two"
+            android:gravity="center"
+            android:layout_alignLeft="@id/img_player_two"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginTop="4dp"/>
+
+
+
+        <ImageView
+            android:id="@+id/img_player_three"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/background_user_in_circle_room"
+            android:layout_toLeftOf="@id/img_player_four"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/avatar_00"/>
+
+        <carbon.widget.TextView
+            android:id="@+id/txt_username_player_one"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="empty"
+            android:textSize="12dp"
+            android:textColor="@color/grey"
+            android:gravity="center"
+            android:fontFamily="@font/baloobhai_regular"
+            android:layout_below="@id/img_player_three"
+            android:layout_alignLeft="@id/img_player_three"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginTop="4dp"/>
+
+
+
+        <ImageView
+            android:id="@+id/img_player_four"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/background_user_in_circle_room"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/avatar_00"/>
+
+        <carbon.widget.TextView
+
+            android:id="@+id/txt_username_player_two"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="empty"
+            android:textSize="12dp"
+            android:gravity="center"
+            android:textColor="@color/grey"
+            android:fontFamily="@font/baloobhai_regular"
+            android:layout_below="@id/img_player_four"
+            android:layout_alignLeft="@id/img_player_four"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginTop="4dp"/>
+
+
+
+
+        <carbon.widget.ImageView
+            android:id="@+id/img_seperator"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/txt_username_player_two"
+            android:layout_marginTop="8dp"
+            android:background="@color/ItalianSkyBlue"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            app:carbon_cornerRadius="1dp"
+            />
+
+
+
+
+        <carbon.widget.LinearLayout
+            android:id="@+id/container_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_seperator"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Points"
+                android:textSize="12dp"
+                android:fontFamily="@font/baloobhai_regular"
+                android:textColor="@color/light_orange"
+                android:layout_below="@id/img_seperator"
+                />
+
+
+            <TextView
+                android:id="@+id/txt_max_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="900"
+                android:textSize="18dp"
+                android:textColor="@color/light_orange"
+                android:layout_gravity="center"
+                android:fontFamily="@font/baloobhai_regular"/>
+
+
+        </carbon.widget.LinearLayout>
+
+
+        <carbon.widget.LinearLayout
+            android:id="@+id/container_joker_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_seperator"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/container_points"
+            >
+
+            <TextView
+                android:id="@+id/lbl_joker_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Joker"
+                android:textSize="12dp"
+                android:fontFamily="@font/baloobhai_regular"
+                android:textColor="@color/carbon_lightGreen_a400"
+                android:layout_below="@id/img_seperator"
+                />
+
+
+            <TextView
+                android:id="@+id/txt_joker_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="On"
+                android:textSize="18dp"
+                android:textColor="@color/carbon_lightGreen_a400"
+                android:layout_gravity="center"
+                android:fontFamily="@font/baloobhai_regular"/>
+
+
+        </carbon.widget.LinearLayout>
+
+
+
+
+        <carbon.widget.LinearLayout
+            android:id="@+id/container_minimum_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_seperator"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/container_joker_status"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Level"
+                android:textSize="12dp"
+                android:fontFamily="@font/baloobhai_regular"
+                android:textColor="@color/MediumSkyBlue"
+                android:layout_below="@id/img_seperator"
+                />
+
+
+            <TextView
+                android:id="@+id/txt_min_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+69"
+                android:textSize="18dp"
+                android:textColor="@color/MediumSkyBlue"
+                android:layout_gravity="center"
+                android:fontFamily="@font/baloobhai_regular"/>
+
+
+        </carbon.widget.LinearLayout>
+
+
+
+
+
+
+    </carbon.widget.RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/profile_activity"
+    tools:context=".activities.ProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        >
+        <carbon.widget.TextView
+            android:id="@+id/txt_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="none"
+            android:textSize="28dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/baloobhai_regular"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+
+        <carbon.widget.ImageView
+            android:id="@+id/img_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="8dp"
+            app:srcCompat="@drawable/ic_back_black"/>
+    </RelativeLayout>
+
+
+
+
+    <ScrollView
+        android:id="@+id/scroll_statics"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:layout_below="@id/header"
+        >
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/container_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                >
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/container_img_avatar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="50dp"
+                    android:clipToPadding="false"
+                    android:clipChildren="false">
+
+                    <carbon.widget.ImageView
+                        android:id="@+id/img_avatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/avatar_02" />
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <carbon.widget.RelativeLayout
+                    android:id="@+id/btn_edit_avatar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:carbon_cornerRadius="20dp"
+                    android:background="@color/FrenchPlum"
+                    android:layout_alignRight="@id/container_img_avatar"
+                    android:layout_alignBottom="@id/container_img_avatar"
+                    app:carbon_elevation="8dp"
+                    android:layout_marginBottom="-4dp"
+                    android:layout_marginRight="-4dp">
+
+
+                    <carbon.widget.ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@color/white"
+                        app:carbon_elevation="8dp"
+                        android:padding="6dp"
+                        android:layout_centerInParent="true"
+                        app:carbon_cornerRadius="20dp"
+                        app:carbon_elevationShadowColor="@color/white"
+                        app:srcCompat="@drawable/ic_pencil" />
+
+
+
+                </carbon.widget.RelativeLayout>
+
+
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/container_img_avatar"
+                    android:layout_centerVertical="true">
+
+
+                    <ImageView
+                        android:id="@+id/img_trophy"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        app:srcCompat="@drawable/ic_trophy"
+                        android:layout_centerHorizontal="true"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1234"
+                        android:textSize="24dp"
+                        android:textColor="@color/light_orange"
+                        android:fontFamily="@font/baloobhai_regular"
+                        android:layout_below="@id/img_trophy"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+                </RelativeLayout>
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/container_img_avatar"
+                    android:layout_centerVertical="true">
+
+                    <ImageView
+                        android:id="@+id/img_like"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/ic_heart" />
+
+
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="2dp"
+                        android:text="21"
+                        android:layout_below="@id/img_like"
+                        android:gravity="center"
+                        android:textSize="24dp"
+                        android:textColor="@color/desire"
+                        android:fontFamily="@font/baloobhai_regular"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+                </RelativeLayout>
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/container_img_avatar"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="22dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:paddingTop="8dp"
+                    android:layout_marginTop="24dp"
+                    >
+
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/container_level_badge"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_alignLeft="@id/container_level_progress"
+                        android:layout_alignTop="@id/container_level_progress"
+                        android:elevation="100dp"
+                        android:layout_marginLeft="-22dp"
+                        android:layout_marginTop="-8dp"
+                        android:outlineProvider="none"
+                        android:hardwareAccelerated="true"
+                        >
+
+                        <carbon.widget.ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:srcCompat="@drawable/ic_badge"
+                            />
+
+                        <carbon.widget.TextView
+                            android:id="@+id/txt_level"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="69"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:gravity="center"
+                            android:fontFamily="@font/baloobhai_regular"
+                            />
+
+
+                    </RelativeLayout>
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/container_level_progress"
+                        android:layout_width="160dp"
+                        android:layout_height="28dp"
+                        android:background="@drawable/background_border_black_radius_24dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="24dp"
+                            android:background="@color/carbon_lightGreen_a400"
+                            android:layout_centerVertical="true"/>
+
+                        <TextView
+                            android:id="@+id/txt_level_progress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="1256/3451"
+                            android:gravity="center"
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:fontFamily="@font/baloobhai_regular"/>
+
+
+
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
+
+
+
+
+
+
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/statics_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_below="@id/container_avatar">
+
+                <LinearLayout
+                    android:id="@+id/first_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/total_matches"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_total_matches"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            app:srcCompat="@drawable/ic_playing_cards"
+                            android:layout_centerHorizontal="true"
+                            />
+
+                        <TextView
+                            android:id="@+id/label_total_matches"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:text="COMPLETED MATCHES"
+                            android:textColor="@color/grey"
+                            android:layout_below="@id/img_total_matches"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:fontFamily="@font/baloobhai_regular"/>
+
+                        <TextView
+                            android:id="@+id/txt_total_matches"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/label_total_matches"
+                            android:text="1609"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/baloobhai_regular"
+                            android:textSize="28dp"
+                            android:layout_centerHorizontal="true"
+                            />
+                    </RelativeLayout>
+
+
+
+
+                    <ImageView
+                        android:layout_width="2dp"
+                        android:layout_height="80dp"
+                        android:background="@color/blue"
+                        android:layout_gravity="center"
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/won_matches"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_won_matches"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            app:srcCompat="@drawable/ic_poker_cards"
+                            android:layout_centerHorizontal="true"
+                            />
+
+                        <TextView
+                            android:id="@+id/label_won_matches"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:text="SUCCESSFUL MATCHES"
+                            android:textColor="@color/grey"
+                            android:layout_below="@id/img_won_matches"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:fontFamily="@font/baloobhai_regular"/>
+
+                        <TextView
+                            android:id="@+id/txt_won_matches"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/label_won_matches"
+                            android:text="1021"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/baloobhai_regular"
+                            android:textSize="28dp"
+                            android:layout_centerHorizontal="true"
+                            />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/second_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/first_row"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/total_time_played"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_total_time_played"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            app:srcCompat="@drawable/ic_clock"
+                            android:layout_centerHorizontal="true"
+                            />
+
+                        <TextView
+                            android:id="@+id/label_total_time_played"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:text="Time               Played"
+                            android:textColor="@color/grey"
+                            android:layout_below="@id/img_total_time_played"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:fontFamily="@font/baloobhai_regular"/>
+
+                        <TextView
+                            android:id="@+id/txt_total_time_played"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/label_total_time_played"
+                            android:text="101h"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/baloobhai_regular"
+                            android:textSize="28dp"
+                            android:layout_centerHorizontal="true"
+                            />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="2dp"
+                        android:layout_height="80dp"
+                        android:background="@color/blue"
+                        android:layout_gravity="center"
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/won_percentage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_won_percentage"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            app:srcCompat="@drawable/ic_percentage"
+                            android:layout_centerHorizontal="true"
+                            />
+
+                        <TextView
+                            android:id="@+id/label_won_percentage"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:text="Success Percentage"
+                            android:textColor="@color/grey"
+                            android:layout_below="@id/img_won_percentage"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:fontFamily="@font/baloobhai_regular"/>
+
+                        <TextView
+                            android:id="@+id/txt_won_percentage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/label_won_percentage"
+                            android:text="60%"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/baloobhai_regular"
+                            android:textSize="28dp"
+                            android:layout_centerHorizontal="true"
+                            />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/container_edit"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:backgroundTint="@color/yellow"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        app:cardCornerRadius="25dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="INFO"
+                android:gravity="center"
+                android:fontFamily="@font/baloobhai_regular"
+                android:textSize="24dp"
+                android:textColor="@color/blue"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                />
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <carbon.widget.RelativeLayout
+        android:id="@+id/container_avatars_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:carbon_elevation="8dp"
+        app:carbon_elevationShadowColor="@color/black"
+        app:carbon_cornerRadius="16dp"
+        android:visibility="invisible"
+        android:elevation="100dp" />
+
+
+
+
+
+</RelativeLayout>
+
+
+

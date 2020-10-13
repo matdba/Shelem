@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_avatars"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"/>
+
+
+    <carbon.widget.RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/white"
+        android:alpha=".7"/>
+
+
+
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/ic_close"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"/>
+
+
+    <ImageView
+        android:id="@+id/img_selected_avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/avatar_00"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true" />
+
+
+    <ImageView
+        android:id="@+id/btn_submit"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/ic_tick"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
