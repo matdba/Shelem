@@ -31,6 +31,7 @@ public class LoginSignupActivity extends AppCompatActivity implements SignupFrag
     UnitHandler unitHandler;
 
 
+    
 
 
     double signupContainerClosedHeight, loginContainerClosedHeight, signupContainerOpenedHeight, loginContainerOpenedHeight;
