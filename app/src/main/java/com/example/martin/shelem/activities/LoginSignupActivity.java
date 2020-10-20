@@ -21,6 +21,8 @@ import com.example.martin.shelem.R;
 import com.example.martin.shelem.utils.SpringInterpolator;
 import com.example.martin.shelem.utils.UnitHandler;
 
+
+
 public class LoginSignupActivity extends AppCompatActivity implements SignupFragment.changeSignupContainerHeightListener {
 
     RelativeLayout mainActivity;
