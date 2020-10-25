@@ -1,124 +1,90 @@
 package com.example.martin.shelem.instances;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
+public class Room {
 
-public class Room implements Parcelable {
+    @SerializedName("roomID")
+    @Expose
+    private Integer roomID;
+    @SerializedName("roomStatus")
+    @Expose
+    private Integer roomStatus;
+    @SerializedName("isJoker")
+    @Expose
+    private Boolean isJoker;
+    @SerializedName("maxPoint")
+    @Expose
+    private Integer maxPoint;
+    @SerializedName("teamOnePoints")
+    @Expose
+    private Integer teamOnePoints;
+    @SerializedName("teamTwoPoints")
+    @Expose
+    private Integer teamTwoPoints;
+    @SerializedName("players")
+    @Expose
+    private List<Player> players = null;
 
-    private String id;
-    private int status, minimumLevel, maxPoints, teamOnePoint, teamTwoPoint;
-    private boolean joker;
-    public List<Player> playerList = new ArrayList<>();
-
-
-
-    public Room() { }
-
-
-
-    public String getId() {
-        return id;
+    public Integer getRoomID() {
+        return roomID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRoomID(Integer roomID) {
+        this.roomID = roomID;
     }
 
-    public int getStatus() {
-        return status;
+    public Integer getRoomStatus() {
+        return roomStatus;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setRoomStatus(Integer roomStatus) {
+        this.roomStatus = roomStatus;
     }
 
-    public int getMinimumLevel() {
-        return minimumLevel;
+    public Boolean getIsJoker() {
+        return isJoker;
     }
 
-    public void setMinimumLevel(int minimumLevel) {
-        this.minimumLevel = minimumLevel;
+    public void setIsJoker(Boolean isJoker) {
+        this.isJoker = isJoker;
     }
 
-    public int getMaxPoints() {
-        return maxPoints;
+    public Integer getMaxPoint() {
+        return maxPoint;
     }
 
-    public void setMaxPoints(int maxPoints) {
-        this.maxPoints = maxPoints;
+    public void setMaxPoint(Integer maxPoint) {
+        this.maxPoint = maxPoint;
     }
 
-    public int getTeamOnePoint() {
-        return teamOnePoint;
+    public Integer getTeamOnePoints() {
+        return teamOnePoints;
     }
 
-    public void setTeamOnePoint(int teamOnePoint) {
-        this.teamOnePoint = teamOnePoint;
+    public void setTeamOnePoints(Integer teamOnePoints) {
+        this.teamOnePoints = teamOnePoints;
     }
 
-    public int getTeamTwoPoint() {
-        return teamTwoPoint;
+    public Integer getTeamTwoPoints() {
+        return teamTwoPoints;
     }
 
-    public void setTeamTwoPoint(int teamTwoPoint) {
-        this.teamTwoPoint = teamTwoPoint;
+    public void setTeamTwoPoints(Integer teamTwoPoints) {
+        this.teamTwoPoints = teamTwoPoints;
     }
 
-    public boolean isJoker() {
-        return joker;
+    public List<Player> getPlayers() {
+        return players;
     }
 
-    public void setJoker(boolean joker) {
-        this.joker = joker;
-    }
-
-
-
-
-
-    protected Room(Parcel in) {
-        id = in.readString();
-        status = in.readInt();
-        minimumLevel = in.readInt();
-        maxPoints = in.readInt();
-        teamOnePoint = in.readInt();
-        teamTwoPoint = in.readInt();
-        joker = in.readByte() != 0;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
 
-    public static final Creator<Room> CREATOR = new Creator<Room>() {
-        @Override
-        public Room createFromParcel(Parcel in) {
-            return new Room(in);
-        }
-
-        @Override
-        public Room[] newArray(int size) {
-            return new Room[size];
-        }
-    };
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeInt(status);
-        dest.writeInt(minimumLevel);
-        dest.writeInt(maxPoints);
-        dest.writeInt(teamOnePoint);
-        dest.writeInt(teamTwoPoint);
-        dest.writeByte((byte) (joker ? 1 : 0));
-    }
 }

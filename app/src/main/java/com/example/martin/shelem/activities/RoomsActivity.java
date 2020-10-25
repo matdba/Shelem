@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -17,17 +16,16 @@ import com.example.martin.shelem.fragments.CreateRoomFragment;
 import com.example.martin.shelem.fragments.LobbyFragment;
 import com.example.martin.shelem.handlers.SocketHandler2;
 import com.example.martin.shelem.R;
+import com.example.martin.shelem.handlers.UserDetails;
 import com.example.martin.shelem.instances.Room;
-import com.example.martin.shelem.adapters.ShelemRoomAdapter;
 import com.example.martin.shelem.interfaces.CloseFragmentListener;
+import com.google.gson.Gson;
 
 
 public class RoomsActivity extends AppCompatActivity implements CloseFragmentListener {
 
     RecyclerView recyclerView;
     ImageView backImg, addRoomImg;
-    public SocketHandler2 socketHandler;
-    ShelemRoomAdapter shelemRoomAdapter;
     CardView lobbyFragmentContainer;
 
 
@@ -56,7 +54,7 @@ public class RoomsActivity extends AppCompatActivity implements CloseFragmentLis
         setContentView(R.layout.activity_rooms);
 
         findViewById(R.id.container_fragment_lobby).setVisibility(View.VISIBLE);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, new LobbyFragment()).addToBackStack("lobby").commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, new LobbyFragment()).addToBackStack("lobby").commit();
 
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
@@ -74,27 +72,29 @@ public class RoomsActivity extends AppCompatActivity implements CloseFragmentLis
 
 
 
-        socketHandler = new SocketHandler2(this);
 
 
+        SocketHandler2.getRoom("70" ,new SocketHandler2.onGetRoomsRecived() {
+            @Override
+            public void onReciced(Room room) {
+                RoomsActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LobbyFragment lobbyFragment = new LobbyFragment();
+                        Bundle bundle = new Bundle();
+                        Gson gson = new Gson();
+                        bundle.putString("room", gson.toJson(room, Room.class));
 
-        socketHandler.getRooms(shelemRooms -> runOnUiThread(() -> {
-
-            shelemRoomAdapter = new ShelemRoomAdapter(RoomsActivity.this, shelemRooms);
-            recyclerView.setLayoutManager(new LinearLayoutManager(RoomsActivity.this,LinearLayoutManager.VERTICAL,false));
-            recyclerView.setAdapter(shelemRoomAdapter);
-
-        }));
+                        lobbyFragment.setArguments(bundle);
+                        findViewById(R.id.container_fragment_lobby).setVisibility(View.VISIBLE);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, lobbyFragment).addToBackStack("lobby").commit();
 
 
+                    }
+                });
+            }
+        });
 
-        socketHandler.updateRooms(roomList -> runOnUiThread(() -> {
-
-            shelemRoomAdapter = new ShelemRoomAdapter(RoomsActivity.this, roomList);
-            recyclerView.setLayoutManager(new LinearLayoutManager(RoomsActivity.this,LinearLayoutManager.VERTICAL,false));
-            recyclerView.setAdapter(shelemRoomAdapter);
-
-        }));
 
 
 
@@ -123,7 +123,6 @@ public class RoomsActivity extends AppCompatActivity implements CloseFragmentLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        socketHandler.socketDisconnect();
     }
 
 
@@ -141,7 +140,9 @@ public class RoomsActivity extends AppCompatActivity implements CloseFragmentLis
         LobbyFragment lobbyFragment = new LobbyFragment();
         Bundle bundle = new Bundle();
 
-        bundle.putParcelable("room", room);
+        //bundle.putParcelable("room", room);
+        Gson gson = new Gson();
+        bundle.putString("room", gson.toJson(room, Room.class));
         bundle.putBoolean("fromCreateRoomFragment", true);
 
         lobbyFragment.setArguments(bundle);

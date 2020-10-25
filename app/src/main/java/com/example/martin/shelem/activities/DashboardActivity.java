@@ -2,6 +2,7 @@ package com.example.martin.shelem.activities;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -35,6 +36,7 @@ import android.widget.TextView;
 
 import com.example.martin.shelem.handlers.APIHandler;
 import com.example.martin.shelem.handlers.AvatarHandler;
+import com.example.martin.shelem.handlers.SocketHandler2;
 import com.example.martin.shelem.instances.RecentGameRooms;
 import com.example.martin.shelem.R;
 import com.example.martin.shelem.adapters.RecentGamesAdapter;
@@ -49,6 +51,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity {
+
+    public static Activity dashboardActivity;
     //declare views-----------------------------------------------------------------------
     CardView headerContainer, profilePicImgContainer;
     RelativeLayout levelBadgeContainer, levelProgressContainer;
@@ -88,6 +92,9 @@ public class DashboardActivity extends AppCompatActivity {
 
 
     private void init() {
+
+        dashboardActivity = this;
+        SocketHandler2.init(new UserDetails(this).getUserID());
 
         headerContainer = findViewById(R.id.container_header);
         profilePicImgContainer = findViewById(R.id.container_img_profile_pic);
@@ -364,6 +371,12 @@ public class DashboardActivity extends AppCompatActivity {
 
 
     public interface Consumer { void accept(Boolean internet); }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SocketHandler2.socketDisconnect();
+    }
 
 
 

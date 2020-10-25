@@ -18,9 +18,12 @@ public class SocketService  {
 
 
 
-    public static void init() {
+    public static void init(String userID) {
         try {
             socket = IO.socket(URL);
+            IO.Options options = new IO.Options();
+            options.query = "userID=" + userID;
+            socket = IO.socket(URL,options);
             socket.connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -40,10 +43,15 @@ public class SocketService  {
 
 
     public static void findRoom(final String userID, final String username, final String avatarNumber, final FindRoomListener findRoomListener) {
-        socket.emit("findRoom", userID, username, avatarNumber, (Ack) args -> {
-            try {
-                findRoomListener.onFound(Integer.parseInt(args[0].toString()), Integer.parseInt(args[1].toString()), new JSONArray(args[2].toString()));
-            } catch (JSONException e) { e.printStackTrace(); }
+        socket.emit("findRoom", userID, username, avatarNumber, new Ack() {
+            @Override
+            public void call(Object... args) {
+                try {
+                    findRoomListener.onFound(Integer.parseInt(args[0].toString()), Integer.parseInt(args[1].toString()), new JSONArray(args[2].toString()));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
         });
     }
 
@@ -63,9 +71,9 @@ public class SocketService  {
 
         socket.on("userJoined", args -> {
             Player player = new Player();
-            player.setUserID(args[0].toString());
+            player.setUserID(Integer.parseInt(args[0].toString()));
             player.setUsername(args[1].toString());
-            player.setAvatarNumber(Integer.parseInt(args[2].toString()));
+            player.setProfilePictureNum(Integer.parseInt(args[2].toString()));
             player.setPlayerNumber(Integer.parseInt(args[3].toString()));
             userJoinedListener.onUserJoined(player);
         });

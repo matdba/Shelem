@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import com.example.martin.shelem.R;
 import com.example.martin.shelem.activities.RoomsActivity;
 import com.example.martin.shelem.handlers.APIHandler;
+import com.example.martin.shelem.handlers.SocketHandler2;
 import com.example.martin.shelem.handlers.UserDetails;
 import com.example.martin.shelem.instances.Room;
 import com.example.martin.shelem.interfaces.CloseFragmentListener;
@@ -165,7 +166,7 @@ public class CreateRoomFragment extends Fragment {
                 public void onRecived(String response) {
 
                     if (response.equals("success")) {
-                        ((RoomsActivity) getActivity()).socketHandler.socket.emit("createRoom");
+                        SocketHandler2.socket.emit("createRoom");
                         getFragmentManager().popBackStack();
                         closeFragmentListener.onFragmentClosed();
                     } else {

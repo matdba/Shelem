@@ -9,6 +9,8 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.martin.shelem.instances.Room;
@@ -391,13 +393,12 @@ public class APIHandler {
                         try {
                             JSONObject jsonObject = new JSONObject(response.split("_")[1]);
                             Room room = new Room();
-                            room.setId(jsonObject.getString("roomID"));
-                            room.setStatus(Integer.parseInt(jsonObject.getString("roomStatus")));
-                            room.setJoker(Boolean.parseBoolean(jsonObject.getString("isJoker")));
-                            room.setMinimumLevel(Integer.parseInt(jsonObject.getString("minLevel")));
-                            room.setMaxPoints(Integer.parseInt(jsonObject.getString("maxPoint")));
-                            room.setTeamOnePoint(0);
-                            room.setTeamTwoPoint(0);
+                            room.setRoomID(Integer.parseInt(jsonObject.getString("roomID")));
+                            room.setRoomStatus(Integer.parseInt(jsonObject.getString("roomStatus")));
+                            room.setIsJoker(Boolean.parseBoolean(jsonObject.getString("isJoker")));
+                            room.setMaxPoint(Integer.parseInt(jsonObject.getString("maxPoint")));
+                            room.setTeamOnePoints(0);
+                            room.setTeamTwoPoints(0);
                             responseListenerCreateShelemRooms.onRecived("success");
                             responseListenerCreateShelemRooms.onDataRecieved(room);
                         } catch (JSONException e) {
@@ -408,10 +409,13 @@ public class APIHandler {
                         responseListenerCreateShelemRooms.onRecived(response);
                     }
 
-                }, error -> {
-                    if (error instanceof NoConnectionError) {
-                        responseListenerCreateShelemRooms.onRecived("NoConnectionError");
-                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NoConnectionError) {
+                    responseListenerCreateShelemRooms.onRecived("NoConnectionError");
+                }
+            }
         }) {
             @Override
             protected Map<String, String> getParams() {

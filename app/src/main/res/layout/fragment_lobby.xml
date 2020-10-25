@@ -23,14 +23,6 @@
 
 
 
-        <carbon.widget.ImageView
-            android:id="@+id/btn_close"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:srcCompat="@drawable/ic_close"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"/>
 
 
         <RelativeLayout
@@ -38,8 +30,7 @@
             android:layout_width="280dp"
             android:layout_height="280dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/btn_close"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="56dp"
             android:background="@drawable/border_circle_shelem_rooms">
 
 
@@ -61,6 +52,18 @@
                 android:layout_height="70dp"
                 android:padding="10dp"
                 android:background="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="-27dp"
+                app:srcCompat="@drawable/avatar_00"
+                />
+
+
+            <carbon.widget.ImageView
+                android:id="@+id/img_avatar_player_three"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="10dp"
+                android:background="@color/white"
                 android:layout_centerHorizontal="true"
                 app:srcCompat="@drawable/avatar_00"
                 android:layout_alignParentBottom="true"
@@ -69,22 +72,10 @@
 
 
 
+
+
             <carbon.widget.ImageView
                 android:id="@+id/img_avatar_player_four"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:padding="10dp"
-                android:background="@color/white"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="-27dp"
-                app:srcCompat="@drawable/avatar_00"
-                />
-
-
-
-
-            <carbon.widget.ImageView
-                android:id="@+id/img_avatar_player_three"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:padding="10dp"
@@ -108,6 +99,33 @@
                 android:layout_centerHorizontal="true"
                 />
 
+
+            <carbon.widget.TextView
+                android:id="@+id/txt_username_player_two"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:text="empty"
+                android:textSize="14dp"
+                android:textColor="@color/grey"
+                android:gravity="center_vertical|left"
+                android:layout_toRightOf="@id/img_avatar_player_two"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/baloobhai_regular"
+                />
+
+
+            <carbon.widget.TextView
+                android:id="@+id/txt_username_player_three"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_above="@id/img_avatar_player_three"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/baloobhai_regular"
+                android:gravity="center"
+                android:text="empty"
+                android:textColor="@color/grey"
+                android:textSize="14dp" />
+
             <carbon.widget.TextView
                 android:id="@+id/txt_username_player_four"
                 android:layout_width="100dp"
@@ -115,37 +133,12 @@
                 android:text="empty"
                 android:textColor="@color/grey"
                 android:textSize="14dp"
-                android:layout_toRightOf="@id/img_avatar_player_four"
-                android:gravity="center_vertical"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/baloobhai_regular"
-                />
-
-            <carbon.widget.TextView
-                android:id="@+id/txt_username_player_three"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:text="emtpy"
-                android:textSize="14dp"
-                android:textColor="@color/grey"
+                android:layout_toLeftOf="@id/img_avatar_player_four"
                 android:gravity="center_vertical|right"
-                android:layout_toLeftOf="@id/img_avatar_player_three"
                 android:layout_centerVertical="true"
                 android:fontFamily="@font/baloobhai_regular"
                 />
 
-
-            <carbon.widget.TextView
-                android:id="@+id/txt_username_player_two"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_above="@id/img_avatar_player_two"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/baloobhai_regular"
-                android:gravity="center"
-                android:text="empty"
-                android:textColor="@color/grey"
-                android:textSize="14dp" />
 
 
         </RelativeLayout>
@@ -263,42 +256,6 @@
                 />
 
 
-            <carbon.widget.TextView
-                android:id="@+id/lbl_level"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:text="Level"
-                android:textSize="16dp"
-                android:gravity="center"
-                android:textColor="@color/MediumSkyBlue"
-                android:fontFamily="@font/baloobhai_regular"
-                android:layout_toRightOf="@id/txt_joker_status"
-                android:layout_marginLeft="16dp"/>
-
-
-
-            <carbon.widget.ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_toRightOf="@id/txt_joker_status"
-                app:srcCompat="@drawable/ic_medal"
-                android:layout_marginLeft="16dp"
-                android:layout_below="@id/lbl_level"
-                />
-
-            <carbon.widget.TextView
-                android:id="@+id/txt_min_level"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:text="+69"
-                android:gravity="center"
-                android:textSize="18dp"
-                android:textColor="@color/MediumSkyBlue"
-                android:fontFamily="@font/baloobhai_regular"
-                android:layout_below="@id/lbl_level"
-                android:layout_marginLeft="16dp"
-                android:layout_toRightOf="@id/txt_joker_status"
-                />
 
 
         </RelativeLayout>

@@ -14,8 +14,10 @@ import com.example.martin.shelem.handlers.AvatarHandler;
 import com.example.martin.shelem.handlers.SocketService;
 import com.example.martin.shelem.handlers.UserDetails;
 import com.example.martin.shelem.instances.Player;
+import com.example.martin.shelem.instances.Room;
 import com.example.martin.shelem.services.ClosingLobby;
 import com.example.martin.shelem.utils.PlayersMatchingHandler;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -134,10 +136,12 @@ public class LobbyActivity extends SocketActivity {
 
         SocketService.readyToGo(() -> runOnUiThread(() -> {
             Intent intent = new Intent(LobbyActivity.this, GameScreenActivity.class);
-            intent.putExtra("player_one", players[0]);
-            intent.putExtra("player_two", players[1]);
-            intent.putExtra("player_three", players[2]);
-            intent.putExtra("player_four", players[3]);
+            Gson gson = new Gson();
+
+            intent.putExtra("player_one", gson.toJson(players[0], Player.class));
+            intent.putExtra("player_two", gson.toJson(players[1], Player.class));
+            intent.putExtra("player_three", gson.toJson(players[2], Player.class));
+            intent.putExtra("player_four", gson.toJson(players[3], Player.class));
             startActivity(intent);
             finish();
         }));
@@ -155,7 +159,7 @@ public class LobbyActivity extends SocketActivity {
             if (players[i] != null) {
 
                 playersUsernames[i].setText(players[i].getUsername());
-                playersAvatars[i].setImageResource(AvatarHandler.fetchAvatar(this, players[i].getAvatarNumber()));
+                playersAvatars[i].setImageResource(AvatarHandler.fetchAvatar(this, players[i].getProfilePictureNum()));
                 if (i == 0) playersUsernames[i].setTextColor(getResources().getColor(R.color.carbon_lightGreen_a400));
                 else playersUsernames[i].setTextColor(getResources().getColor(R.color.black));
 
@@ -179,19 +183,22 @@ public class LobbyActivity extends SocketActivity {
             int index = PlayersMatchingHandler.handle(playerNumber, jsonObject.getInt("playerNumber"));
 
             players[index] = new Player();
-            players[index].setUserID(jsonObject.getString("userID"));
+            players[index].setUserID(Integer.parseInt(jsonObject.getString("userID")));
             players[index].setUsername(jsonObject.getString("username"));
-            players[index].setAvatarNumber(jsonObject.getInt("avatarNumber"));
+            players[index].setProfilePictureNum(jsonObject.getInt("avatarNumber"));
             players[index].setPlayerNumber(jsonObject.getInt("playerNumber"));
 
         }
 
         if (jsonArray.length() == 4) {
             Intent intent = new Intent(LobbyActivity.this, GameScreenActivity.class);
-            intent.putExtra("player_one", players[0]);
-            intent.putExtra("player_two", players[1]);
-            intent.putExtra("player_three", players[2]);
-            intent.putExtra("player_four", players[3]);
+            Gson gson = new Gson();
+
+            intent.putExtra("player_one", gson.toJson(players[0], Player.class));
+            intent.putExtra("player_two", gson.toJson(players[1], Player.class));
+            intent.putExtra("player_three", gson.toJson(players[2], Player.class));
+            intent.putExtra("player_four", gson.toJson(players[3], Player.class));
+
             startActivity(intent);
             finish();
         }
@@ -203,7 +210,7 @@ public class LobbyActivity extends SocketActivity {
         players[index] = new Player();
         players[index].setUserID(player.getUserID());
         players[index].setUsername(player.getUsername());
-        players[index].setAvatarNumber(player.getAvatarNumber());
+        players[index].setProfilePictureNum(player.getProfilePictureNum());
         players[index].setPlayerNumber(player.getPlayerNumber());
     }
 

@@ -3,34 +3,57 @@ package com.example.martin.shelem.instances;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Player implements Parcelable {
-     private String username, userID, roomID;
-     private int avatarNumber, playerStatus, playerNumber;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class Player  {
 
-    public Player() { }
+    @SerializedName("roomID")
+    @Expose
+    private Integer roomID;
+    @SerializedName("userID")
+    @Expose
+    private Integer userID;
+    @SerializedName("username")
+    @Expose
+    private String username;
+    @SerializedName("profilePictureNum")
+    @Expose
+    private Integer profilePictureNum;
+    @SerializedName("totalxp")
+    @Expose
+    private Integer totalxp;
+    @SerializedName("totalMatches")
+    @Expose
+    private Integer totalMatches;
+    @SerializedName("wonMatches")
+    @Expose
+    private Integer wonMatches;
+    @SerializedName("playedTime")
+    @Expose
+    private Integer playedTime;
+    @SerializedName("playerStatus")
+    @Expose
+    private Integer playerStatus;
+    @SerializedName("playerNumber")
+    @Expose
+    private Integer playerNumber;
 
-
-    protected Player(Parcel in) {
-        username = in.readString();
-        userID = in.readString();
-        roomID = in.readString();
-        avatarNumber = in.readInt();
-        playerStatus = in.readInt();
-        playerNumber = in.readInt();
+    public Integer getRoomID() {
+        return roomID;
     }
 
-    public static final Creator<Player> CREATOR = new Creator<Player>() {
-        @Override
-        public Player createFromParcel(Parcel in) {
-            return new Player(in);
-        }
+    public Integer getUserID() {
+        return userID;
+    }
 
-        @Override
-        public Player[] newArray(int size) {
-            return new Player[size];
-        }
-    };
+    public void setRoomID(Integer roomID) {
+        this.roomID = roomID;
+    }
+
+    public void setUserID(Integer userID) {
+        this.userID = userID;
+    }
 
     public String getUsername() {
         return username;
@@ -40,60 +63,61 @@ public class Player implements Parcelable {
         this.username = username;
     }
 
-    public String getUserID() {
-        return userID;
+    public Integer getProfilePictureNum() {
+        return profilePictureNum;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setProfilePictureNum(Integer profilePictureNum) {
+        this.profilePictureNum = profilePictureNum;
     }
 
-    public String getRoomID() {
-        return roomID;
+    public Integer getTotalxp() {
+        return totalxp;
     }
 
-    public void setRoomID(String roomID) {
-        this.roomID = roomID;
+    public void setTotalxp(Integer totalxp) {
+        this.totalxp = totalxp;
     }
 
-
-    public int getAvatarNumber() {
-        return avatarNumber;
+    public Integer getTotalMatches() {
+        return totalMatches;
     }
 
-    public void setAvatarNumber(int avatarNumber) {
-        this.avatarNumber = avatarNumber;
+    public void setTotalMatches(Integer totalMatches) {
+        this.totalMatches = totalMatches;
     }
 
-    public int getPlayerStatus() {
+    public Integer getWonMatches() {
+        return wonMatches;
+    }
+
+    public void setWonMatches(Integer wonMatches) {
+        this.wonMatches = wonMatches;
+    }
+
+    public Integer getPlayedTime() {
+        return playedTime;
+    }
+
+    public void setPlayedTime(Integer playedTime) {
+        this.playedTime = playedTime;
+    }
+
+    public Integer getPlayerStatus() {
         return playerStatus;
     }
 
-    public void setPlayerStatus(int playerStatus) {
+    public void setPlayerStatus(Integer playerStatus) {
         this.playerStatus = playerStatus;
     }
 
-    public int getPlayerNumber() {
+    public Integer getPlayerNumber() {
         return playerNumber;
     }
 
-    public void setPlayerNumber(int playerNumber) {
+    public void setPlayerNumber(Integer playerNumber) {
         this.playerNumber = playerNumber;
     }
 
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(username);
-        dest.writeString(userID);
-        dest.writeString(roomID);
-        dest.writeInt(avatarNumber);
-        dest.writeInt(playerStatus);
-        dest.writeInt(playerNumber);
-    }
 }

@@ -28,13 +28,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.martin.shelem.activities.DashboardActivity"/>
+        <activity android:name="com.example.martin.shelem.activities.DashboardActivity">
+
+        </activity>
 
         <activity android:name="com.example.martin.shelem.activities.LobbyActivity"/>
 
         <activity android:name="com.example.martin.shelem.activities.ProfileActivity"/>
 
         <activity android:name="com.example.martin.shelem.activities.GameScreenActivity">
+
+
         </activity>
 
         <activity android:name="com.example.martin.shelem.activities.RoomsActivity"/>
