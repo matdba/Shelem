@@ -55,26 +55,18 @@ public class RoomsActivity extends BaseActivity implements CloseFragmentListener
 
 
 
-        SocketHandler2.getRoom("70" ,new SocketHandler2.onGetRoomsRecived() {
-            @Override
-            public void onReciced(Room room) {
-                RoomsActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        LobbyFragment lobbyFragment = new LobbyFragment();
-                        Bundle bundle = new Bundle();
-                        Gson gson = new Gson();
-                        bundle.putString("room", gson.toJson(room, Room.class));
+        SocketHandler2.getRoom("70" , room -> RoomsActivity.this.runOnUiThread(() -> {
+            LobbyFragment lobbyFragment = new LobbyFragment();
+            Bundle bundle = new Bundle();
+            Gson gson = new Gson();
+            bundle.putString("room", gson.toJson(room, Room.class));
 
-                        lobbyFragment.setArguments(bundle);
-                        findViewById(R.id.container_fragment_lobby).setVisibility(View.VISIBLE);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, lobbyFragment).addToBackStack("lobby").commit();
+            lobbyFragment.setArguments(bundle);
+            findViewById(R.id.container_fragment_lobby).setVisibility(View.VISIBLE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, lobbyFragment).addToBackStack("lobby").commit();
 
 
-                    }
-                });
-            }
-        });
+        }));
 
 
 

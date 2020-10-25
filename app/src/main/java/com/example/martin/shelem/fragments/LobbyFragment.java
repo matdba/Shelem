@@ -183,9 +183,6 @@ public class LobbyFragment extends Fragment {
         if (player.getUserID() != 0) {
             playersAvatars[player.getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(getActivity(), player.getProfilePictureNum()));
             playersUsernames[player.getPlayerNumber() - 1].setText(player.getUsername());
-        } else {
-            playersAvatars[player.getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(getActivity(),0));
-            playersUsernames[player.getPlayerNumber() - 1].setText("empty");
         }
 
     }
