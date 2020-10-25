@@ -183,7 +183,7 @@ public class CardViewHandler {
                 myCardsImgs[finalI].bringToFront();
                 setMyCardsPositions(myCardsImgs[finalI], finalI, -30f + (anglePerCard * finalI));
                 animationHandler.flipAnimation(myCardsImgs[finalI], 100);
-                animationHandler.rotationAnimation(myCardsImgs[finalI], -30f + (anglePerCard * finalI), 100);
+                animationHandler.rotationAnimation(myCardsImgs[finalI], -30f + (anglePerCard * finalI), 100, null);
             }, 150 * (finalI + 1));
         }
     }
@@ -208,9 +208,9 @@ public class CardViewHandler {
             }
         }
 
-        animationHandler.bottomMarginAnimation(view, bottomMargin, 400);
-        animationHandler.leftMarginAnimation(view, leftMargin, 400);
-        animationHandler.rightMarginAnimation(view, unitHandler.screenWidth - cardWidth - leftMargin, 400);
+        animationHandler.bottomMarginAnimation(view, bottomMargin, 400, null);
+        animationHandler.leftMarginAnimation(view, leftMargin, 400, null);
+        animationHandler.rightMarginAnimation(view, unitHandler.screenWidth - cardWidth - leftMargin, 400, null);
     }
 
 
@@ -238,7 +238,7 @@ public class CardViewHandler {
 
         for (int i = 0; i < myCardsImgs.length; i++) {
             myCardsImgs[i].bringToFront();
-            animationHandler.rotationAnimation(myCardsImgs[i], -30f + (anglePerCard * i), 400);
+            animationHandler.rotationAnimation(myCardsImgs[i], -30f + (anglePerCard * i), 400, null);
             setMyCardsPositions(myCardsImgs[i], i, -30f + (anglePerCard * i));
         }
 
@@ -271,13 +271,13 @@ public class CardViewHandler {
 
 
         if (myCardsImgs.length == 1) {
-            animationHandler.rotationAnimation(myCardsImgs[0], 0, 400);
-            animationHandler.leftMarginAnimation(myCardsImgs[0], unitHandler.screenWidth / 2 - unitHandler.getPixels(40), 400);
+            animationHandler.rotationAnimation(myCardsImgs[0], 0, 400, null);
+            animationHandler.leftMarginAnimation(myCardsImgs[0], unitHandler.screenWidth / 2 - unitHandler.getPixels(40), 400, null);
         } else {
             anglePerCard = totalAngle / (float) (myCardsImgs.length - 1);
             cardImagesLength = getMyCardsbetweenSpace(myCardsImgs.length);
             for (int i = 0; i < myCardsImgs.length; i++) {
-                animationHandler.rotationAnimation(myCardsImgs[i], -30f + (anglePerCard * i), 400);
+                animationHandler.rotationAnimation(myCardsImgs[i], -30f + (anglePerCard * i), 400, null);
                 setMyCardsPositions(myCardsImgs[i], i, -30f + (anglePerCard * i));
             }
         }
@@ -393,10 +393,10 @@ public class CardViewHandler {
                     isChooseLeftOverMode = false;
                 }
                 animationHandler.scaleAnimation(leftOverCardsImgs[finalI], .8f, .8f, 600);
-                animationHandler.topMarginAnimation(leftOverCardsImgs[finalI], - unitHandler.screenHeight - bottomMargin - cardHeight, 600);
-                animationHandler.bottomMarginAnimation(leftOverCardsImgs[finalI], bottomMargin, 600);
-                animationHandler.leftMarginAnimation(leftOverCardsImgs[finalI], leftMargin, 600);
-                animationHandler.rightMarginAnimation(leftOverCardsImgs[finalI],unitHandler.screenWidth - leftMargin - cardWidth, 600);
+                animationHandler.topMarginAnimation(leftOverCardsImgs[finalI], - unitHandler.screenHeight - bottomMargin - cardHeight, 600, null);
+                animationHandler.bottomMarginAnimation(leftOverCardsImgs[finalI], bottomMargin, 600, null);
+                animationHandler.leftMarginAnimation(leftOverCardsImgs[finalI], leftMargin, 600, null);
+                animationHandler.rightMarginAnimation(leftOverCardsImgs[finalI],unitHandler.screenWidth - leftMargin - cardWidth, 600, null);
             }, 150 * (leftOverCardsImgs.length - finalI));
 
         }
@@ -429,8 +429,8 @@ public class CardViewHandler {
 
                 animationHandler.flipAnimation(leftOverCardsImgs[finalI], 100);
                 animationHandler.scaleAnimation(leftOverCardsImgs[finalI], .8f, .8f, 400);
-                animationHandler.bottomMarginAnimation(leftOverCardsImgs[finalI], bottomMargin, 400);
-                animationHandler.leftMarginAnimation(leftOverCardsImgs[finalI], leftMargin, 400);
+                animationHandler.bottomMarginAnimation(leftOverCardsImgs[finalI], bottomMargin, 400, null);
+                animationHandler.leftMarginAnimation(leftOverCardsImgs[finalI], leftMargin, 400, null);
 
             }, 150 * (leftOverCardsImgs.length - finalI));
 
@@ -453,8 +453,8 @@ public class CardViewHandler {
                     && layoutParams.bottomMargin < leftoverCardsPositions[i].getBottom() + unitHandler.getPixels(42)) {
 
                 positioned = true;
-                animationHandler.bottomMarginAnimation(view, leftoverCardsPositions[i].getBottom(), 300);
-                animationHandler.leftMarginAnimation(view, leftoverCardsPositions[i].getLeft(), 300);
+                animationHandler.bottomMarginAnimation(view, leftoverCardsPositions[i].getBottom(), 300, null);
+                animationHandler.leftMarginAnimation(view, leftoverCardsPositions[i].getLeft(), 300, null);
                 animationHandler.scaleAnimation(view, .8f, .8f, 300);
                 animationHandler.scaleAnimation(leftOverCardsImgs[i], 1, 1, 300);
 
@@ -475,10 +475,10 @@ public class CardViewHandler {
 
         if (!positioned) {
             bringToFrontHandlerMyCards();
-            animationHandler.rotationAnimation(myCardsImgs[position], initRotation, 300);
-            animationHandler.bottomMarginAnimation(myCardsImgs[position], initBottomMargin, 300);
-            animationHandler.leftMarginAnimation(myCardsImgs[position], initLeftMargin, 300);
-            animationHandler.rightMarginAnimation(myCardsImgs[position], unitHandler.screenWidth - cardWidth - initLeftMargin, 300);
+            animationHandler.rotationAnimation(myCardsImgs[position], initRotation, 300, null);
+            animationHandler.bottomMarginAnimation(myCardsImgs[position], initBottomMargin, 300, null);
+            animationHandler.leftMarginAnimation(myCardsImgs[position], initLeftMargin, 300, null);
+            animationHandler.rightMarginAnimation(myCardsImgs[position], unitHandler.screenWidth - cardWidth - initLeftMargin, 300, null);
         }
     }
 
@@ -576,10 +576,10 @@ public class CardViewHandler {
             int finalBottomMargin = bottomMargin;
             int finalI = i;
             new Handler().postDelayed(() -> {
-                animationHandler.topMarginAnimation(otherPlayersCardsImgs[finalI], - unitHandler.screenHeight - finalBottomMargin - cardHeight, 800);
-                animationHandler.bottomMarginAnimation(otherPlayersCardsImgs[finalI], finalBottomMargin, 800);
-                animationHandler.leftMarginAnimation(otherPlayersCardsImgs[finalI], finalLeftMargin, 600);
-                animationHandler.rightMarginAnimation(otherPlayersCardsImgs[finalI],unitHandler.screenWidth - finalLeftMargin - cardWidth, 600);
+                animationHandler.topMarginAnimation(otherPlayersCardsImgs[finalI], - unitHandler.screenHeight - finalBottomMargin - cardHeight, 800, null);
+                animationHandler.bottomMarginAnimation(otherPlayersCardsImgs[finalI], finalBottomMargin, 800, null);
+                animationHandler.leftMarginAnimation(otherPlayersCardsImgs[finalI], finalLeftMargin, 600, null);
+                animationHandler.rightMarginAnimation(otherPlayersCardsImgs[finalI],unitHandler.screenWidth - finalLeftMargin - cardWidth, 600, null);
             }, 150 * (finalI + 1));
         }
     }
@@ -601,8 +601,8 @@ public class CardViewHandler {
 
             int leftMargin = (int) (unitHandler.screenWidth / 2 - (.5 * cardWidth));
             int bottomMargin = unitHandler.screenHeight / 2 - (cardHeight);
-            animationHandler.bottomMarginAnimation(myCardsImgs[position], bottomMargin, 300);
-            animationHandler.leftMarginAnimation(myCardsImgs[position], leftMargin, 300);
+            animationHandler.bottomMarginAnimation(myCardsImgs[position], bottomMargin, 300, null);
+            animationHandler.leftMarginAnimation(myCardsImgs[position], leftMargin, 300, null);
             animationHandler.scaleAnimation(myCardsImgs[position], .8f, .8f, 300);
             sortMyCardsPositions(position);
             otherPlayersCardPlayed(directions.right, 2, playerTwoCardsImgs, 1);
@@ -613,10 +613,10 @@ public class CardViewHandler {
         } else {
 
             bringToFrontHandlerMyCards();
-            animationHandler.rotationAnimation(myCardsImgs[position], initRotation, 300);
-            animationHandler.bottomMarginAnimation(myCardsImgs[position], initBottomMargin, 300);
-            animationHandler.leftMarginAnimation(myCardsImgs[position], initLeftMargin, 300);
-            animationHandler.rightMarginAnimation(myCardsImgs[position], unitHandler.screenWidth - cardWidth - initLeftMargin, 300);
+            animationHandler.rotationAnimation(myCardsImgs[position], initRotation, 300, null);
+            animationHandler.bottomMarginAnimation(myCardsImgs[position], initBottomMargin, 300, null);
+            animationHandler.leftMarginAnimation(myCardsImgs[position], initLeftMargin, 300, null);
+            animationHandler.rightMarginAnimation(myCardsImgs[position], unitHandler.screenWidth - cardWidth - initLeftMargin, 300, null);
 
         }
     }
@@ -657,10 +657,10 @@ public class CardViewHandler {
         }
 
         animationHandler.flipAnimation(cardsImgs[position], 300);
-        animationHandler.bottomMarginAnimation(cardsImgs[position], bottomMargin, 600);
-        animationHandler.topMarginAnimation(cardsImgs[position], unitHandler.screenHeight - cardHeight - bottomMargin, 600);
-        animationHandler.leftMarginAnimation(cardsImgs[position], leftMargin, 600);
-        animationHandler.rightMarginAnimation(cardsImgs[position], unitHandler.screenWidth - cardWidth - leftMargin, 600);
+        animationHandler.bottomMarginAnimation(cardsImgs[position], bottomMargin, 600, null);
+        animationHandler.topMarginAnimation(cardsImgs[position], unitHandler.screenHeight - cardHeight - bottomMargin, 600, null);
+        animationHandler.leftMarginAnimation(cardsImgs[position], leftMargin, 600, null);
+        animationHandler.rightMarginAnimation(cardsImgs[position], unitHandler.screenWidth - cardWidth - leftMargin, 600, null);
         animationHandler.scaleAnimation(cardsImgs[position], .8f, .8f, 600);
     }
 
@@ -693,10 +693,10 @@ public class CardViewHandler {
         }
 
         for (ImageViewCustom currentPlayedCard : currentPlayedCards) {
-            animationHandler.topMarginAnimation(currentPlayedCard, -unitHandler.screenHeight - bottomMargin - cardHeight, 600);
-            animationHandler.bottomMarginAnimation(currentPlayedCard, bottomMargin, 600);
-            animationHandler.leftMarginAnimation(currentPlayedCard, leftMargin, 600);
-            animationHandler.rightMarginAnimation(currentPlayedCard, unitHandler.screenWidth - leftMargin - cardWidth, 600);
+            animationHandler.topMarginAnimation(currentPlayedCard, -unitHandler.screenHeight - bottomMargin - cardHeight, 600, null);
+            animationHandler.bottomMarginAnimation(currentPlayedCard, bottomMargin, 600, null);
+            animationHandler.leftMarginAnimation(currentPlayedCard, leftMargin, 600, null);
+            animationHandler.rightMarginAnimation(currentPlayedCard, unitHandler.screenWidth - leftMargin - cardWidth, 600, null);
             animationHandler.scaleAnimation(currentPlayedCard, 1, 1, 600);
             currentPlayedCard = null;
         }

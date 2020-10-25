@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,9 +16,9 @@ import android.widget.Toast;
 
 import com.example.martin.shelem.R;
 import com.example.martin.shelem.activities.DashboardActivity;
-import com.example.martin.shelem.activities.LoginSignupActivity;
 import com.example.martin.shelem.handlers.APIHandler;
-import com.example.martin.shelem.handlers.UserDetails;
+import com.example.martin.shelem.interfaces.IActivityResponse;
+import com.example.martin.shelem.utils.FullScreenModeSwitch;
 import com.example.martin.shelem.utils.UnitHandler;
 import com.github.ybq.android.spinkit.SpinKitView;
 
@@ -30,7 +31,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import carbon.widget.RelativeLayout;
 
-public class LoginFragment extends Fragment implements LoginSignupActivity.clearFocusInFragmentListener, LoginSignupActivity.onBackPressed {
+public class LoginFragment extends Fragment implements IActivityResponse {
     private View view;
     private CardView usernameEtContainer, passwordEtContainer;
     private EditText usernameEt, passwordEt;
@@ -43,9 +44,7 @@ public class LoginFragment extends Fragment implements LoginSignupActivity.clear
     private SpinKitView loginProgressbar;
 
 
-
     private APIHandler apiHandler;
-    private UserDetails userDetails;
     private UnitHandler unitHandler;
 
     private final String usernamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.]*";
@@ -69,7 +68,6 @@ public class LoginFragment extends Fragment implements LoginSignupActivity.clear
 
 
         apiHandler = new APIHandler(getActivity());
-        userDetails = new UserDetails(getActivity());
         unitHandler = new UnitHandler(getActivity());
 
         unitHandler.setViewsHeightAndWidth(loginLbl, unitHandler.getPixels(200), unitHandler.getPixels(50));
@@ -91,8 +89,6 @@ public class LoginFragment extends Fragment implements LoginSignupActivity.clear
         unitHandler.setViewsHeightAndWidth(loginBtn, unitHandler.getPixels(140), unitHandler.getPixels(40));
         unitHandler.setViewTopMargin(loginBtn, unitHandler.getPixels(32));
 
-        ((LoginSignupActivity) getActivity()).getLoginFragment(this);
-
     }
 
     @Nullable
@@ -103,33 +99,7 @@ public class LoginFragment extends Fragment implements LoginSignupActivity.clear
         init();
 
 
-
-
-        usernameEt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (!Pattern.matches(usernamePattern, s.toString())) {
-//                    usernameEt.setText(s.toString().substring(0, s.toString().length() - 1));
-//                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-
-
-
-
         forgetPasswordBtn.setOnClickListener(v -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container_other_fragment, new ForgetPasswordFragment()).commit());
-
 
 
         loginBtn.setOnClickListener(v -> {
@@ -163,41 +133,40 @@ public class LoginFragment extends Fragment implements LoginSignupActivity.clear
 
 
 
+
         usernameEt.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                fullscreenModeOff();
+                FullScreenModeSwitch.off(Objects.requireNonNull(getActivity()));
                 errorMessageTxt.setVisibility(View.INVISIBLE);
                 usernameEt.setHint("username");
                 usernameEt.setHintTextColor(getActivity().getResources().getColor(R.color.light_grey));
                 usernameEt.setBackgroundResource(R.drawable.background_et_focus_on_solid_blue_corner_8dp);
                 usernameEtErrorImg.setVisibility(View.INVISIBLE);
-            } else { fullscreenModeOn(); }
+            } else {
+                FullScreenModeSwitch.on(Objects.requireNonNull(getActivity()));
+            }
         });
 
 
 
         passwordEt.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                fullscreenModeOff();
+                FullScreenModeSwitch.off(Objects.requireNonNull(getActivity()));
                 errorMessageTxt.setVisibility(View.INVISIBLE);
                 passwordEt.setHint("password");
                 passwordEt.setHintTextColor(getActivity().getResources().getColor(R.color.light_grey));
                 passwordEt.setBackgroundResource(R.drawable.background_et_focus_on_solid_blue_corner_8dp);
                 passwordEtErrorImg.setVisibility(View.INVISIBLE);
-            } else { fullscreenModeOn(); }
-            });
+            } else {
+                FullScreenModeSwitch.on(Objects.requireNonNull(getActivity()));
+            }
+        });
 
 
 
         passwordEt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -210,10 +179,16 @@ public class LoginFragment extends Fragment implements LoginSignupActivity.clear
         });
 
 
+        passwordEt.setOnEditorActionListener((v, actionId, event) ->  {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                FullScreenModeSwitch.on(Objects.requireNonNull(getActivity()));
+                passwordEt.clearFocus();
+            }
+            return false;
+        });
+
         return view;
     }
-
-
 
 
 
@@ -237,39 +212,12 @@ public class LoginFragment extends Fragment implements LoginSignupActivity.clear
 
 
 
-    private void fullscreenModeOn() {
-        Objects.requireNonNull(getActivity()).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-    }
-
-
-
-
-
-    private void fullscreenModeOff() {
-        Objects.requireNonNull(getActivity()).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-    }
-
-
-
-
-
     @Override
-    public void onFocusCleared() {
-        usernameEt.clearFocus();
-        passwordEt.clearFocus();
-        errorMessageTxt.setVisibility(View.INVISIBLE);
-    }
-
-
-
-    @Override
-    public void onBackPressed() {
-        usernameEt.clearFocus();
-        passwordEt.clearFocus();
+    public void onActivityResponse(String... args) {
+        if (args[0].equals("clear focus")) {
+            usernameEt.clearFocus();
+            passwordEt.clearFocus();
+            errorMessageTxt.setVisibility(View.INVISIBLE);
+        }
     }
 }

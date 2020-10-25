@@ -32,26 +32,15 @@ public class SocketService  {
 
 
 
-
-
-
     public static void socketDisconnect() { socket.disconnect(); }
 
 
 
-
-
-
     public static void findRoom(final String userID, final String username, final String avatarNumber, final FindRoomListener findRoomListener) {
-        socket.emit("findRoom", userID, username, avatarNumber, new Ack() {
-            @Override
-            public void call(Object... args) {
-                try {
-                    findRoomListener.onFound(Integer.parseInt(args[0].toString()), Integer.parseInt(args[1].toString()), new JSONArray(args[2].toString()));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+        socket.emit("findRoom", userID, username, avatarNumber, (Ack) args -> {
+            try {
+                findRoomListener.onFound(Integer.parseInt(args[0].toString()), Integer.parseInt(args[1].toString()), new JSONArray(args[2].toString()));
+            } catch (JSONException e) { e.printStackTrace(); }
         });
     }
 

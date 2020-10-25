@@ -3,9 +3,6 @@ package com.example.martin.shelem.activities;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.os.Build;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import carbon.widget.ImageView;
@@ -25,7 +22,7 @@ import com.example.martin.shelem.interfaces.CloseFragmentListener;
 import com.example.martin.shelem.utils.SpringInterpolator;
 import com.example.martin.shelem.utils.UnitHandler;
 
-public class ProfileActivity extends AppCompatActivity implements CloseFragmentListener {
+public class ProfileActivity extends BaseActivity implements CloseFragmentListener {
 
     ScrollView scrollView;
     RelativeLayout header;
@@ -78,23 +75,6 @@ public class ProfileActivity extends AppCompatActivity implements CloseFragmentL
     }
 
 
-
-
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
-    }
 
 
 

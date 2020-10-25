@@ -336,13 +336,13 @@
                 android:layout_alignParentBottom="true"
                 app:carbon_cornerRadiusTopEnd="72dp"
                 app:carbon_elevation="8dp"
-                app:carbon_elevationShadowColor="@color/FrenchPlum">
+                app:carbon_elevationShadowColor="@color/black">
 
                 <carbon.widget.RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:carbon_cornerRadiusTopEnd="72dp"
-                    android:background="@color/FrenchPlum">
+                    android:background="@color/black">
 
 
                     <TextView
