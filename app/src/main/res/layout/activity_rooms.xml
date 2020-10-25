@@ -8,12 +8,11 @@
     tools:context=".activities.RoomsActivity">
 
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:id="@+id/container_header"
         android:layout_width="match_parent"
         android:layout_height="76dp"
-        android:backgroundTint="@color/blue"
-        app:cardCornerRadius="16dp"
+        android:background="@color/blue"
         android:layout_marginTop="-16dp">
 
         <RelativeLayout
@@ -55,183 +54,21 @@
 
 
 
-
-
         </RelativeLayout>
 
 
 
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
 
-
-    <carbon.widget.LinearLayout
-        android:id="@+id/container_joker_switch"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:background="@color/light_grey"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        app:carbon_cornerRadius="20dp"
-        android:orientation="horizontal"
-        android:layout_below="@id/container_header">
-
-
-        <carbon.widget.TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="On"
-            android:textSize="14dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/baloobhai_regular"
-            android:gravity="center"
-            />
-
-
-
-        <carbon.widget.TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Off"
-            android:textSize="14dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/baloobhai_regular"
-            android:gravity="center"
-            />
-
-
-
-    </carbon.widget.LinearLayout>
-
-
-    <carbon.widget.TextView
-        android:layout_width="110dp"
-        android:layout_height="48dp"
-        android:text="Joker"
-        android:textSize="18dp"
-        android:layout_marginTop="-4dp"
-        android:layout_marginLeft="-10dp"
-        android:layout_alignLeft="@id/container_joker_switch"
-        android:layout_alignTop="@id/container_joker_switch"
-        android:textColor="@color/white"
-        android:fontFamily="@font/baloobhai_regular"
-        android:gravity="center"
-        app:carbon_cornerRadius="24dp"
-        app:carbon_elevation="8dp"
-        app:carbon_elevationShadowColor="@color/carbon_lightGreen_a700"
-        android:background="@drawable/background_green_border_white_radius_full"/>
-
-
-
-
-
-    <carbon.widget.LinearLayout
-        android:id="@+id/container_points"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/container_joker_switch"
-        android:background="@color/white"
-        app:carbon_elevation="8dp"
-        app:carbon_elevationShadowColor="@color/light_yellow"
-        app:carbon_cornerRadius="16dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="All"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:background="@color/yellow"
-            android:fontFamily="@font/baloobhai_regular"/>
-
-        <ImageView
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="@color/yellow"
-            android:layout_marginTop="8dp"
-            android:visibility="invisible"
-            android:layout_marginBottom="8dp"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="900"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:fontFamily="@font/baloobhai_regular"/>
-
-        <ImageView
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="@color/yellow"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            />
-
-
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="600"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:fontFamily="@font/baloobhai_regular"/>
-
-        <ImageView
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="@color/yellow"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
-
-
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="300"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:fontFamily="@font/baloobhai_regular"/>
-
-
-
-
-    </carbon.widget.LinearLayout>
-
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_shelem_rooms"
-        android:layout_width="match_parent"
-        android:layout_marginTop="16dp"
-        android:layout_below="@id/container_points"
-        android:layout_height="match_parent"/>
-
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:id="@+id/container_fragment_lobby"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:backgroundTint="@android:color/transparent"
-        app:cardElevation="26dp"
-        />
+        android:layout_height="match_parent" />
+
+
+
+
 
 
 

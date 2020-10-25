@@ -11,19 +11,17 @@ import androidx.fragment.app.Fragment;
 import carbon.widget.ImageView;
 import carbon.widget.TextView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
-import com.example.martin.shelem.activities.BaseActivity;
-import com.example.martin.shelem.activities.DashboardActivity;
+import com.example.martin.shelem.customViews.CurvedLine;
 import com.example.martin.shelem.handlers.AvatarHandler;
 import com.example.martin.shelem.handlers.SocketHandler2;
 import com.example.martin.shelem.handlers.UserDetails;
 import com.example.martin.shelem.instances.Player;
 import com.example.martin.shelem.instances.Room;
-import com.example.martin.shelem.interfaces.CloseFragmentListener;
 import com.example.martin.shelem.R;
 import com.google.gson.Gson;
 
@@ -36,25 +34,16 @@ import java.util.List;
 public class LobbyFragment extends Fragment {
 
     private View view;
-    private CardView root;
-
-
-
-    private TextView maxPointTxt, jokerStatusTxt, minLevelTxt, jokerStatusLbl;
+    private RelativeLayout root;
+    private TextView maxPointTxt, jokerStatusTxt, jokerStatusLbl;
     private ImageView[] playersAvatars = new ImageView[4];
     private TextView[] playersUsernames = new TextView[4];
-
-    private TextView readyBtn, getupBtn;
-
+    private CardView closeImg;
 
     private UserDetails userDetails;
-    private CloseFragmentListener closeFragmentListener;
     private Room room;
 
-
-
-    private boolean fromCreateRoomFragment,sit;
-    private int joinedPlayersNum = 1;
+    private boolean sit;
     private int myNumber = 0;
 
 
@@ -74,13 +63,11 @@ public class LobbyFragment extends Fragment {
         playersUsernames[3] = view.findViewById(R.id.txt_username_player_four);
 
 
-        readyBtn = view.findViewById(R.id.btn_ready);
-        getupBtn = view.findViewById(R.id.btn_getup);
-
         maxPointTxt = view.findViewById(R.id.txt_max_point);
         jokerStatusTxt = view.findViewById(R.id.txt_joker_status);
-        minLevelTxt = view.findViewById(R.id.txt_min_level);
         jokerStatusLbl = view.findViewById(R.id.lbl_joker_status);
+
+        closeImg = view.findViewById(R.id.btn_close);
 
 
         String strtext = getArguments().getString("room");
@@ -89,9 +76,12 @@ public class LobbyFragment extends Fragment {
 
         userDetails = new UserDetails(getContext());
 
-
-
-        closeFragmentListener = (CloseFragmentListener) getActivity();
+        for (int i = 0; i < 4; i++) {
+            CurvedLine curvedLine = new CurvedLine(getActivity(), null);
+            curvedLine.setStartAngle(i * 90 + 22.5f);
+            curvedLine.setSweapAngle(45f);
+            root.addView(curvedLine);
+        }
 
 
 //        fromCreateRoomFragment = getArguments().getBoolean("fromCreateRoomFragment", false);
@@ -108,14 +98,6 @@ public class LobbyFragment extends Fragment {
             jokerStatusLbl.setTextColor(getResources().getColor(R.color.orange));
         }
 
-
-        if (fromCreateRoomFragment) {
-            playersUsernames[0].setText(userDetails.getUsername());
-            playersUsernames[0].setTextColor(getActivity().getResources().getColor(R.color.carbon_lightGreen_a400));
-            readyBtn.setBackgroundResource(R.color.blue);
-            readyBtn.setText("Unready");
-            readyBtn.setElevationShadowColor(R.color.blue);
-        }
 
         initPlayers(room.getPlayers());
 
@@ -139,8 +121,8 @@ public class LobbyFragment extends Fragment {
 
 
 
-        getupBtn.setOnClickListener(v -> {
-            getupBtn.setClickable(false);
+        closeImg.setOnClickListener(v -> {
+            closeImg.setClickable(false);
             getUp(myNumber);
             getFragmentManager().beginTransaction().remove(LobbyFragment.this).commit();
         });
@@ -148,13 +130,21 @@ public class LobbyFragment extends Fragment {
 
 
 
-        playersAvatars[0].setOnClickListener(view -> { sitPlayer(1); });
+        playersAvatars[0].setOnClickListener(view -> {
+            sitPlayer(1);
+        });
 
-        playersAvatars[1].setOnClickListener(view -> { sitPlayer(2); });
+        playersAvatars[1].setOnClickListener(view -> {
+            sitPlayer(2);
+        });
 
-        playersAvatars[2].setOnClickListener(view -> { sitPlayer(3); });
+        playersAvatars[2].setOnClickListener(view -> {
+            sitPlayer(3);
+        });
 
-        playersAvatars[3].setOnClickListener(view -> { sitPlayer(4); });
+        playersAvatars[3].setOnClickListener(view -> {
+            sitPlayer(4);
+        });
 
 
 
@@ -188,7 +178,7 @@ public class LobbyFragment extends Fragment {
     }
 
     private  boolean canSit(int i){
-        if (!sit && playersUsernames[i - 1].getText().equals("empty")) return true;
+        if (!sit && playersUsernames[i - 1].getText().equals("")) return true;
         else return false;
     }
 
