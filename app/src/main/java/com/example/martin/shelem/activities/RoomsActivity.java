@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.example.martin.shelem.fragments.CreateRoomFragment;
 import com.example.martin.shelem.fragments.LobbyFragment;
@@ -22,11 +23,7 @@ import com.google.gson.Gson;
 
 public class RoomsActivity extends BaseActivity implements CloseFragmentListener {
 
-    RecyclerView recyclerView;
     ImageView backImg, addRoomImg;
-    CardView lobbyFragmentContainer;
-
-
 
 
     @Override
@@ -34,58 +31,27 @@ public class RoomsActivity extends BaseActivity implements CloseFragmentListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rooms);
 
-        findViewById(R.id.container_fragment_lobby).setVisibility(View.VISIBLE);
-        //getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, new LobbyFragment()).addToBackStack("lobby").commit();
 
-
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-
-        recyclerView = findViewById(R.id.rv_shelem_rooms);
         backImg = findViewById(R.id.img_back);
         addRoomImg = findViewById(R.id.img_add_room);
 
-        lobbyFragmentContainer = findViewById(R.id.container_fragment_lobby);
 
+        SocketHandler2.getRoom("70" , room -> RoomsActivity.this.runOnUiThread(() -> {
+            LobbyFragment lobbyFragment = new LobbyFragment();
+            Bundle bundle = new Bundle();
+            Gson gson = new Gson();
+            bundle.putString("room", gson.toJson(room, Room.class));
 
-
-
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-
-
-
-
-
-        SocketHandler2.getRoom("70" ,new SocketHandler2.onGetRoomsRecived() {
-            @Override
-            public void onReciced(Room room) {
-                RoomsActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        LobbyFragment lobbyFragment = new LobbyFragment();
-                        Bundle bundle = new Bundle();
-                        Gson gson = new Gson();
-                        bundle.putString("room", gson.toJson(room, Room.class));
-
-                        lobbyFragment.setArguments(bundle);
-                        findViewById(R.id.container_fragment_lobby).setVisibility(View.VISIBLE);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, lobbyFragment).addToBackStack("lobby").commit();
-
-
-                    }
-                });
-            }
-        });
-
-
-
+            lobbyFragment.setArguments(bundle);
+            findViewById(R.id.container_fragment_lobby).setVisibility(View.VISIBLE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, lobbyFragment).addToBackStack("lobby").commit();
+        }));
 
 
         backImg.setOnClickListener(v -> finish());
 
 
-
         addRoomImg.setOnClickListener(v -> {
-            lobbyFragmentContainer.setVisibility(View.VISIBLE);
             getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, new CreateRoomFragment()).addToBackStack("add-room").commit();
         });
 
@@ -96,7 +62,6 @@ public class RoomsActivity extends BaseActivity implements CloseFragmentListener
 
     @Override
     public void onBackPressed() {
-        lobbyFragmentContainer.setVisibility(View.INVISIBLE);
         super.onBackPressed();
     }
 
@@ -110,8 +75,7 @@ public class RoomsActivity extends BaseActivity implements CloseFragmentListener
 
     @Override
     public void onFragmentClosed() {
-        lobbyFragmentContainer.setVisibility(View.INVISIBLE);
-        lobbyFragmentContainer.setVisibility(View.INVISIBLE);
+
     }
 
 
@@ -121,14 +85,12 @@ public class RoomsActivity extends BaseActivity implements CloseFragmentListener
         LobbyFragment lobbyFragment = new LobbyFragment();
         Bundle bundle = new Bundle();
 
-        //bundle.putParcelable("room", room);
         Gson gson = new Gson();
         bundle.putString("room", gson.toJson(room, Room.class));
         bundle.putBoolean("fromCreateRoomFragment", true);
 
         lobbyFragment.setArguments(bundle);
 
-        lobbyFragmentContainer.setVisibility(View.VISIBLE);
         getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, lobbyFragment).addToBackStack("lobby").commit();
     }
 }
