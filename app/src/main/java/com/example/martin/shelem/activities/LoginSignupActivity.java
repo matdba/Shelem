@@ -21,6 +21,9 @@ import com.example.martin.shelem.utils.UnitHandler;
 
 public class LoginSignupActivity extends BaseActivity implements IFragmentResponse {
 
+
+
+
     RelativeLayout mainActivity;
     FrameLayout signupFragmentContainer, loginFragmentContainer, otherFragmentContainer;
     IActivityResponse iActivityResponseToLogin;
