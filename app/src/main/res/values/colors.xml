@@ -5,14 +5,12 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="lapis_lazuli">#247BA0</color>
-    <color name="green_sheen">#70C1B3</color>
-    <color name="sea_foam_green">#B2DBBF</color>
     <color name="very_pale_yellow">#F3FFBD</color>
     <color name="desire">#ef233c</color>
-    <color name="black">#073B4C</color>
+    <color name="black">#143642</color>
+    <color name="dirty_black">#353535</color>
     <color name="white">#F1FAEE</color>
     <color name="grey">#94958F</color>
-    <color name="dark_grey">#50514F</color>
     <color name="light_grey">#D8D9CF</color>
     <color name="green">#02C39A</color>
     <color name="MediumSkyBlue">#65def1</color>
@@ -22,49 +20,14 @@
     <color name="light_orange">#FFC107</color>
 
 
-    <color name="mid_night_blue">#050E51</color>
-    <color name="night_blue">#293164</color>
     <color name="blue">#01c8ef</color>
     <color name="red">#f50057</color>
-    <color name="mid_yellow">#ffc500</color>
     <color name="light_yellow">#FFD600</color>
-    <color name="light_green">#7CB342</color>
-    <color name="light_blue">#2196F3</color>
-
-    <color name="light_mustard">#FFF59D</color>
-    <color name="sunset_orange">#F25F5C</color>
-    <color name="dark_liver">#50514F</color>
     <color name="liver">#E71D36</color>
-
-    <color name="Flame">#e4572e</color>
     <color name="CaribbeanGreen">#02c39a</color>
     <color name="Celadon">#abfcaf</color>
-    <color name="zard">#fabc3c</color>
-    <color name="SunsetOrange">#f25c54</color>
 
 
 
-    <color name="FrenchPlum">#011627</color>
-    <color name="GargoyleGas">#ffd447</color>
-    <color name="EnglishVermillion">#f71735</color>
-    <color name="TuftsBlue">#3f88c5</color>
-    <color name="RussianViolet">#521945</color>
-    <color name="Purple">#820263</color>
-
-
-
-    <color name="PastelRed">#ff6b6b</color>
-    <color name="EnglishGreen">#1a535c</color>
-    <color name="Malachite">#20bf55</color>
-    <color name="Cyan">#01baef</color>
-    <color name="PrussianBlue">#083a56</color>
-    <color name="DeepCarmine">#a4243b</color>
-    <color name="GiantsOrange">#f86624</color>
-
-
-
-    <color name="kir1">#020862</color>
-    <color name="kir2">#040e90</color>
-    <color name="kir3">#3b4fb2</color>
 
 </resources>

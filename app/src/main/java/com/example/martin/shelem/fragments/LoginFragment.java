@@ -44,7 +44,6 @@ public class LoginFragment extends Fragment implements IActivityResponse {
     private SpinKitView loginProgressbar;
 
 
-
     private APIHandler apiHandler;
     private UnitHandler unitHandler;
 

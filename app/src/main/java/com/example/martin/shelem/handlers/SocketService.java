@@ -18,9 +18,11 @@ public class SocketService  {
 
 
 
-    public static void init() {
+    public static void init(String userID) {
         try {
-            socket = IO.socket(URL);
+            IO.Options options = new IO.Options();
+            options.query = "userID=" + userID;
+            socket = IO.socket(URL, options);
             socket.connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -29,13 +31,7 @@ public class SocketService  {
 
 
 
-
-
-
     public static void socketDisconnect() { socket.disconnect(); }
-
-
-
 
 
 
