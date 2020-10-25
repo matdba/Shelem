@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import com.example.martin.shelem.handlers.APIHandler;
 import com.example.martin.shelem.handlers.AvatarHandler;
+import com.example.martin.shelem.handlers.SocketHandler2;
 import com.example.martin.shelem.instances.RecentGameRooms;
 import com.example.martin.shelem.R;
 import com.example.martin.shelem.adapters.RecentGamesAdapter;
@@ -89,6 +90,8 @@ public class DashboardActivity extends BaseActivity {
 
     private void init() {
 
+
+
         headerContainer = findViewById(R.id.container_header);
         profilePicImgContainer = findViewById(R.id.container_img_profile_pic);
         levelBadgeContainer = findViewById(R.id.container_level_badge);
@@ -125,6 +128,7 @@ public class DashboardActivity extends BaseActivity {
         unitHandler = new UnitHandler(this);
         moreContainerLayoutParams = (RelativeLayout.LayoutParams) moreContainer.getLayoutParams();
         recentGameRoomsList = new ArrayList<>();
+        SocketHandler2.init(userDetails.getUserID());
 
         recentGameRoomsList.add(new RecentGameRooms());
         recentGameRoomsList.add(new RecentGameRooms());

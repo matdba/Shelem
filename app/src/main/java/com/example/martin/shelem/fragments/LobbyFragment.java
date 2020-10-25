@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.martin.shelem.activities.BaseActivity;
 import com.example.martin.shelem.activities.DashboardActivity;
 import com.example.martin.shelem.handlers.AvatarHandler;
 import com.example.martin.shelem.handlers.SocketHandler2;
@@ -116,7 +117,7 @@ public class LobbyFragment extends Fragment {
             readyBtn.setElevationShadowColor(R.color.blue);
         }
 
-        setPlayers(room.getPlayers());
+        initPlayers(room.getPlayers());
 
 
 
@@ -141,7 +142,7 @@ public class LobbyFragment extends Fragment {
         getupBtn.setOnClickListener(v -> {
             getupBtn.setClickable(false);
             getUp(myNumber);
-            getActivity().finish();
+            getFragmentManager().beginTransaction().remove(LobbyFragment.this).commit();
         });
 
 
@@ -166,11 +167,11 @@ public class LobbyFragment extends Fragment {
         return view;
     }
 
-    private void setPlayers(List<Player> players){
+    private void initPlayers(List<Player> players){
 
         for (int i = 0; i < players.size(); i++) {
 
-            playersAvatars[players.get(i).getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(DashboardActivity.dashboardActivity, players.get(i).getProfilePictureNum()));
+            playersAvatars[players.get(i).getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(getActivity(), players.get(i).getProfilePictureNum()));
             playersUsernames[players.get(i).getPlayerNumber() - 1].setText(players.get(i).getUsername());
 
         }
@@ -180,10 +181,10 @@ public class LobbyFragment extends Fragment {
     private void setPlayer(Player player){
 
         if (player.getUserID() != 0) {
-            playersAvatars[player.getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(DashboardActivity.dashboardActivity, player.getProfilePictureNum()));
+            playersAvatars[player.getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(getActivity(), player.getProfilePictureNum()));
             playersUsernames[player.getPlayerNumber() - 1].setText(player.getUsername());
         } else {
-            playersAvatars[player.getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(DashboardActivity.dashboardActivity,0));
+            playersAvatars[player.getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(getActivity(),0));
             playersUsernames[player.getPlayerNumber() - 1].setText("empty");
         }
 
@@ -220,10 +221,6 @@ public class LobbyFragment extends Fragment {
 
         }
     }
-
-
-
-
 
 
 }
