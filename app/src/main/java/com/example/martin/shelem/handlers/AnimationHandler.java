@@ -6,6 +6,7 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.view.View;
+import android.view.animation.Interpolator;
 import android.widget.RelativeLayout;
 
 import com.example.martin.shelem.customViews.ImageViewCustom;
@@ -23,13 +24,16 @@ public class AnimationHandler {
 
 
 
-    public void topMarginAnimation(final View view, int topMargin, int duration) {
+    public void topMarginAnimation(final View view, int topMargin, int duration, Interpolator interpolator) {
         final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
         ValueAnimator valueAnimator = ValueAnimator.ofInt(layoutParams.topMargin, topMargin);
+        valueAnimator.setInterpolator(interpolator);
+
         valueAnimator.addUpdateListener(valueAnimator1 -> {
             layoutParams.topMargin = (Integer) valueAnimator1.getAnimatedValue();
             view.requestLayout();
         });
+
         valueAnimator.setDuration(duration);
         valueAnimator.start();
     }
@@ -38,13 +42,16 @@ public class AnimationHandler {
 
 
 
-    public void bottomMarginAnimation(final View view, int bottomMargin, int duration) {
+    public void bottomMarginAnimation(final View view, int bottomMargin, int duration, Interpolator interpolator) {
         final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
         ValueAnimator valueAnimator = ValueAnimator.ofInt(layoutParams.bottomMargin, bottomMargin);
+        valueAnimator.setInterpolator(interpolator);
+
         valueAnimator.addUpdateListener(valueAnimator1 -> {
             layoutParams.bottomMargin = (Integer) valueAnimator1.getAnimatedValue();
             view.requestLayout();
         });
+
         valueAnimator.setDuration(duration);
         valueAnimator.start();
     }
@@ -53,13 +60,16 @@ public class AnimationHandler {
 
 
 
-    public void leftMarginAnimation(final View view, int leftMargin, int duration) {
+    public void leftMarginAnimation(final View view, int leftMargin, int duration, Interpolator interpolator) {
         final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
         ValueAnimator valueAnimator = ValueAnimator.ofInt(layoutParams.leftMargin, leftMargin);
+        valueAnimator.setInterpolator(interpolator);
+
         valueAnimator.addUpdateListener(valueAnimator1 -> {
             layoutParams.leftMargin = (Integer) valueAnimator1.getAnimatedValue();
             view.requestLayout();
         });
+
         valueAnimator.setDuration(duration);
         valueAnimator.start();
     }
@@ -68,13 +78,16 @@ public class AnimationHandler {
 
 
 
-    public void rightMarginAnimation(final View view, int rightMargin, int duration) {
+    public void rightMarginAnimation(final View view, int rightMargin, int duration, Interpolator interpolator) {
         final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
         ValueAnimator valueAnimator = ValueAnimator.ofInt(layoutParams.rightMargin, rightMargin);
+        valueAnimator.setInterpolator(interpolator);
+
         valueAnimator.addUpdateListener(valueAnimator1 -> {
             layoutParams.rightMargin = (Integer) valueAnimator1.getAnimatedValue();
             view.requestLayout();
         });
+
         valueAnimator.setDuration(duration);
         valueAnimator.start();
     }
@@ -83,12 +96,15 @@ public class AnimationHandler {
 
 
 
-    public void rotationAnimation(final View view, float rotation, int duration) {
+    public void rotationAnimation(final View view, float rotation, int duration, Interpolator interpolator) {
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(view.getRotation(), rotation);
+        valueAnimator.setInterpolator(interpolator);
+
         valueAnimator.addUpdateListener(valueAnimator1 -> {
             view.setRotation((float) valueAnimator1.getAnimatedValue());
             view.requestLayout();
         });
+
         valueAnimator.setDuration(duration);
         valueAnimator.start();
     }

@@ -3,9 +3,6 @@ package com.example.martin.shelem.activities;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -18,15 +15,20 @@ import com.example.martin.shelem.fragments.LoginFragment;
 import com.example.martin.shelem.fragments.SignupFragment;
 import com.example.martin.shelem.handlers.UserDetails;
 import com.example.martin.shelem.R;
-import com.example.martin.shelem.utils.SpringInterpolator;
+import com.example.martin.shelem.interfaces.IActivityResponse;
+import com.example.martin.shelem.interfaces.IFragmentResponse;
 import com.example.martin.shelem.utils.UnitHandler;
 
-public class LoginSignupActivity extends AppCompatActivity implements SignupFragment.changeSignupContainerHeightListener {
+public class LoginSignupActivity extends BaseActivity implements IFragmentResponse {
+
+
+
 
     RelativeLayout mainActivity;
     FrameLayout signupFragmentContainer, loginFragmentContainer, otherFragmentContainer;
-    clearFocusInFragmentListener clearFocusInFragmentListener;
-    onBackPressed onBackPressed;
+    IActivityResponse iActivityResponseToLogin;
+    LoginFragment loginFragment;
+    SignupFragment signupFragment;
 
     UnitHandler unitHandler;
 
@@ -35,22 +37,6 @@ public class LoginSignupActivity extends AppCompatActivity implements SignupFrag
     double signupContainerClosedHeight, loginContainerClosedHeight, signupContainerOpenedHeight, loginContainerOpenedHeight;
     boolean isLoginOpen = false, isSignupOpen = false;
 
-
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
-    }
 
 
     private void init() {
@@ -63,6 +49,11 @@ public class LoginSignupActivity extends AppCompatActivity implements SignupFrag
         otherFragmentContainer = findViewById(R.id.container_other_fragment);
 
         unitHandler = new UnitHandler(this);
+
+        loginFragment = new LoginFragment();
+        signupFragment = new SignupFragment();
+
+        iActivityResponseToLogin = loginFragment;
 
 
 
@@ -93,8 +84,8 @@ public class LoginSignupActivity extends AppCompatActivity implements SignupFrag
         layoutParams1.bottomMargin = - (int) (unitHandler.baseScreenHeight - (2 * loginContainerClosedHeight));
         loginFragmentContainer.setLayoutParams(layoutParams1);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.container_login_fragment, new LoginFragment()).commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.container_signup_fragment, new SignupFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container_login_fragment, loginFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container_signup_fragment, signupFragment).commit();
     }
 
     @Override
@@ -116,14 +107,14 @@ public class LoginSignupActivity extends AppCompatActivity implements SignupFrag
         loginFragmentContainer.setOnClickListener(v -> {
             hideKeyboard();
             if (!isLoginOpen) {
-                animateBottomMargin(loginFragmentContainer, (int) (- unitHandler.baseScreenHeight + signupContainerClosedHeight + loginContainerOpenedHeight), 1250, new SpringInterpolator());
-                animateBottomMargin(signupFragmentContainer, - unitHandler.baseScreenHeight + (int) (signupContainerClosedHeight), 200, null);
+                animateBottomMargin(loginFragmentContainer, (int) (- unitHandler.baseScreenHeight + signupContainerClosedHeight + loginContainerOpenedHeight), 200, null);
+                animateBottomMargin(signupFragmentContainer, - unitHandler.baseScreenHeight + (int) (signupContainerClosedHeight), 150, null);
                 isLoginOpen = true;
                 isSignupOpen = false;
             } else {
-                clearFocusInFragmentListener.onFocusCleared();
-                animateBottomMargin(loginFragmentContainer, - (unitHandler.baseScreenHeight - (int) (2 * loginContainerClosedHeight)), 1250, new SpringInterpolator());
-                animateBottomMargin(signupFragmentContainer, - (unitHandler.baseScreenHeight - (int) (signupContainerClosedHeight)), 200, null);
+                iActivityResponseToLogin.onActivityResponse("clear focus");
+                animateBottomMargin(loginFragmentContainer, - (unitHandler.baseScreenHeight - (int) (2 * loginContainerClosedHeight)), 200, null);
+                animateBottomMargin(signupFragmentContainer, - (unitHandler.baseScreenHeight - (int) (signupContainerClosedHeight)), 150, null);
                 isLoginOpen = false;
             }
         });
@@ -134,13 +125,13 @@ public class LoginSignupActivity extends AppCompatActivity implements SignupFrag
             hideKeyboard();
 
             if (!isSignupOpen) {
-                clearFocusInFragmentListener.onFocusCleared();
-                animateBottomMargin(signupFragmentContainer, (int) (- unitHandler.baseScreenHeight + signupContainerOpenedHeight), 1250, new SpringInterpolator());
+                iActivityResponseToLogin.onActivityResponse("clear focus");
+                animateBottomMargin(signupFragmentContainer, (int) (- unitHandler.baseScreenHeight + signupContainerOpenedHeight), 150, null);
                 animateBottomMargin(loginFragmentContainer, (int) (- unitHandler.baseScreenHeight + signupContainerOpenedHeight + loginContainerClosedHeight), 200, null);
                 isLoginOpen = false;
                 isSignupOpen = true;
             } else {
-                animateBottomMargin(signupFragmentContainer, - (unitHandler.baseScreenHeight - (int) (signupContainerClosedHeight)), 1250, new SpringInterpolator());
+                animateBottomMargin(signupFragmentContainer, - (unitHandler.baseScreenHeight - (int) (signupContainerClosedHeight)), 150, null);
                 animateBottomMargin(loginFragmentContainer, - (unitHandler.baseScreenHeight - (int) (2 * loginContainerClosedHeight)), 200, null);
                 isSignupOpen = false;
             }
@@ -182,17 +173,22 @@ public class LoginSignupActivity extends AppCompatActivity implements SignupFrag
 
 
 
-
-    public void getLoginFragment(LoginFragment loginFragment) {
-        clearFocusInFragmentListener =  loginFragment;
-        onBackPressed = loginFragment;
+    @Override
+    public void onBackPressed() {
+        final InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (inputMethodManager.isActive() && getCurrentFocus() != null) {
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            getCurrentFocus().clearFocus();
+        } else {
+            super.onBackPressed();
+        }
     }
 
 
 
     @Override
-    public void onHeightChanged(boolean doExpand) {
-        if (doExpand) {
+    public void onFragmentResponse(String... args) {
+        if (args[0].equals("true")) {
             animateBottomMargin(signupFragmentContainer, (int) (-unitHandler.baseScreenHeight + signupContainerOpenedHeight + loginContainerClosedHeight), 200, null);
             signupFragmentContainer.setClickable(false);
             loginFragmentContainer.setClickable(false);
@@ -201,28 +197,5 @@ public class LoginSignupActivity extends AppCompatActivity implements SignupFrag
             signupFragmentContainer.setClickable(true);
             loginFragmentContainer.setClickable(true);
         }
-
     }
-
-
-    @Override
-    public void onBackPressed() {
-        onBackPressed.onBackPressed();
-//        super.onBackPressed();
-    }
-
-
-
-
-
-    public interface clearFocusInFragmentListener {
-        void onFocusCleared();
-    }
-
-
-    public interface onBackPressed {
-        void onBackPressed();
-    }
-
-
 }

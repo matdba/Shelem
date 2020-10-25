@@ -1,8 +1,6 @@
 package com.example.martin.shelem.activities;
 
-import android.os.Build;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -22,7 +20,7 @@ import com.example.martin.shelem.adapters.ShelemRoomAdapter;
 import com.example.martin.shelem.interfaces.CloseFragmentListener;
 
 
-public class RoomsActivity extends AppCompatActivity implements CloseFragmentListener {
+public class RoomsActivity extends BaseActivity implements CloseFragmentListener {
 
     RecyclerView recyclerView;
     ImageView backImg, addRoomImg;
@@ -31,23 +29,6 @@ public class RoomsActivity extends AppCompatActivity implements CloseFragmentLis
     CardView lobbyFragmentContainer;
 
 
-
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-            );
-        }
-    }
 
 
     @Override

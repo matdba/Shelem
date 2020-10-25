@@ -15,29 +15,43 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
+        android:resizeableActivity="false">
 
         <service android:name="com.example.martin.shelem.services.ClosingLobby" android:stopWithTask="false"/>
 
 
 
-        <activity android:name="com.example.martin.shelem.activities.LoginSignupActivity">
+        <activity android:name="com.example.martin.shelem.activities.LoginSignupActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:resizeableActivity="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.martin.shelem.activities.DashboardActivity"/>
+        <activity android:name="com.example.martin.shelem.activities.DashboardActivity"
+            android:screenOrientation="portrait"
+            android:resizeableActivity="false"/>
 
-        <activity android:name="com.example.martin.shelem.activities.LobbyActivity"/>
+        <activity android:name="com.example.martin.shelem.activities.LobbyActivity"
+            android:screenOrientation="portrait"
+            android:resizeableActivity="false"/>
 
-        <activity android:name="com.example.martin.shelem.activities.ProfileActivity"/>
+        <activity android:name="com.example.martin.shelem.activities.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:resizeableActivity="false"/>
 
-        <activity android:name="com.example.martin.shelem.activities.GameScreenActivity">
+        <activity android:name="com.example.martin.shelem.activities.GameScreenActivity"
+            android:screenOrientation="portrait"
+            android:resizeableActivity="false">
         </activity>
 
-        <activity android:name="com.example.martin.shelem.activities.RoomsActivity"/>
+        <activity android:name="com.example.martin.shelem.activities.RoomsActivity"
+            android:screenOrientation="portrait"
+            android:resizeableActivity="false"/>
 
     </application>
 

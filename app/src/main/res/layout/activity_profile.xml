@@ -92,7 +92,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     app:carbon_cornerRadius="20dp"
-                    android:background="@color/FrenchPlum"
+                    android:background="@color/black"
                     android:layout_alignRight="@id/container_img_avatar"
                     android:layout_alignBottom="@id/container_img_avatar"
                     app:carbon_elevation="8dp"

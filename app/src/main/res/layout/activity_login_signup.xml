@@ -43,6 +43,7 @@
         android:id="@+id/container_signup_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="10dp"
         android:layout_alignParentBottom="true"/>
 
 
@@ -51,6 +52,7 @@
         android:id="@+id/container_login_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="10dp"
         android:layout_alignParentBottom="true"/>
 
 
