@@ -1,5 +1,6 @@
 package com.example.martin.shelem.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
@@ -8,9 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
 
+    public static Activity activity;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = this;
 
         enableImmersiveMode();
     }

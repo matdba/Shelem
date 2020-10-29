@@ -11,11 +11,14 @@ import androidx.fragment.app.Fragment;
 import carbon.widget.ImageView;
 import carbon.widget.TextView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.example.martin.shelem.activities.BaseActivity;
 import com.example.martin.shelem.customViews.CurvedLine;
 import com.example.martin.shelem.handlers.AvatarHandler;
 import com.example.martin.shelem.handlers.SocketHandler2;
@@ -130,8 +133,11 @@ public class LobbyFragment extends Fragment {
 
 
 
-        playersAvatars[0].setOnClickListener(view -> {
-            sitPlayer(1);
+        playersAvatars[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LobbyFragment.this.sitPlayer(1);
+            }
         });
 
         playersAvatars[1].setOnClickListener(view -> {
@@ -148,7 +154,12 @@ public class LobbyFragment extends Fragment {
 
 
 
-        SocketHandler2.updatePlayerShelemLobby(player -> setPlayer(player));
+        SocketHandler2.updatePlayerShelemLobby(new SocketHandler2.onGetUpdatePlayerShelemLobby() {
+            @Override
+            public void onPlayerReciced(Player player) {
+                setPlayer(player);
+            }
+        });
 
 
 
@@ -161,7 +172,7 @@ public class LobbyFragment extends Fragment {
 
         for (int i = 0; i < players.size(); i++) {
 
-            playersAvatars[players.get(i).getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(getActivity(), players.get(i).getProfilePictureNum()));
+            playersAvatars[players.get(i).getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(BaseActivity.activity, players.get(i).getProfilePictureNum()));
             playersUsernames[players.get(i).getPlayerNumber() - 1].setText(players.get(i).getUsername());
 
         }
@@ -171,8 +182,11 @@ public class LobbyFragment extends Fragment {
     private void setPlayer(Player player){
 
         if (player.getUserID() != 0) {
-            playersAvatars[player.getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(getActivity(), player.getProfilePictureNum()));
+            playersAvatars[player.getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(BaseActivity.activity, player.getProfilePictureNum()));
             playersUsernames[player.getPlayerNumber() - 1].setText(player.getUsername());
+        } else {
+            playersAvatars[player.getPlayerNumber() - 1].setImageResource(BaseActivity.activity.getResources().getIdentifier("avatar_empy" , "drawable", BaseActivity.activity.getPackageName()));
+            playersUsernames[player.getPlayerNumber() - 1].setText("");
         }
 
     }
@@ -194,16 +208,33 @@ public class LobbyFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            SocketHandler2.joinShelmRoom(jsonObject, onReciced -> { });
-            sit = true;
+            SocketHandler2.joinShelmRoom(jsonObject, new SocketHandler2.onJoinShelemRoomRecived() {
+                Player p;
+                @Override
+                public void onPlayerReciced(Player player) { p = player; }
+                @Override
+                public void onStatusReciced(Boolean onReciced) {
+                    if (onReciced){
+                        setPlayer(p);
+                        sit = true;
+                    }
+                }
+                @Override
+                public void onCaptionReciced(String onReciced) {
+                    //Toast.makeText(getActivity(),onReciced,Toast.LENGTH_LONG).show();
+                    Log.i("boz", "onCaptionReciced: " + onReciced);
+                }
+
+            });
+
         }
 
     }
 
     private void getUp(int number){
+
         if (number != 0) {
             SocketHandler2.leftShelemRoom(room.getRoomID(), Integer.parseInt(userDetails.getUserID()), number, onReciced -> {
-                
             });
 
         }

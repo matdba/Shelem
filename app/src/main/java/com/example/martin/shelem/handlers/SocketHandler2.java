@@ -76,11 +76,23 @@ public class SocketHandler2 extends AppCompatActivity {
         socket.emit("joinShelemRoom",player, new Ack() {
             @Override
             public void call(final Object... args) {
-                if (args[0].toString().equals("false")) {
-                    onJoinShelemRoomRecived.onReciced("This Room Is Full");
-                } else {
-                    onJoinShelemRoomRecived.onReciced("Joined");
-                }
+                JSONObject jsonObject = null;
+                Gson gson = new Gson();
+                try {
+                    jsonObject = new JSONObject(args[0].toString());
+
+                    Log.i("yoo", "call: " + jsonObject.toString());
+                    if (!jsonObject.get("status").equals("true")) {
+                        onJoinShelemRoomRecived.onStatusReciced(false);
+                        onJoinShelemRoomRecived.onCaptionReciced(jsonObject.get("caption").toString());
+
+                    } else {
+                        onJoinShelemRoomRecived.onPlayerReciced(gson.fromJson(jsonObject.get("player").toString(), Player.class));
+                        onJoinShelemRoomRecived.onStatusReciced(true);
+
+                    }
+                } catch (JSONException e) { e.printStackTrace(); }
+
             }
         });
 
@@ -123,12 +135,13 @@ public class SocketHandler2 extends AppCompatActivity {
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = new JSONObject(args[0].toString());
+                    Log.i("top", "call: " + args[0].toString());
+                    if (jsonObject.get("status").equals("true")){
+                        onGetUpdatePlayerShelemLobby.onPlayerReciced(gson.fromJson(jsonObject.get("player").toString(), Player.class));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                onGetUpdatePlayerShelemLobby.onRecieved(gson.fromJson(jsonObject.toString(), Player.class));
-
             }
         });
 
@@ -144,14 +157,6 @@ public class SocketHandler2 extends AppCompatActivity {
     */
 
 
-    public static void deleteRoom(final int roomID, final deleteRoomListener deleteRoomListener) {
-        socket.emit("deleteRoom", roomID , new Ack() {
-            @Override
-            public void call(Object... args) {
-                deleteRoomListener.onDeleted(String.valueOf(args[0]));
-            }
-        });
-    }
 
     public static void getRecentGame(String username,final onGetRecentGame onGetRecentGame){
         JSONObject jsonObject = new JSONObject();
@@ -205,26 +210,6 @@ public class SocketHandler2 extends AppCompatActivity {
                     recentGameRoomsList.add(recentGameRooms);
                 }
                 onGetRecentGame.onRevived(recentGameRoomsList);
-            }
-        });
-    }
-
-    public static void getShelemLobbyLeave(final onLeftShelemRoomRecived onLeftShelemRoomRecived){
-        socket.on("shelemLobbyLeave", new Emitter.Listener() {
-            @Override
-            public void call(final Object... args) {
-                onLeftShelemRoomRecived.onReciced(args[0].toString());
-            }
-        });
-    }
-
-    public void getLobbyShelem(final onLobbyRecived onLobbyRecived){
-        socket.on("shelemLobby", args -> {
-            JSONObject json = (JSONObject) args[0];
-            try {
-                onLobbyRecived.onReciced(json);
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         });
     }
@@ -294,7 +279,9 @@ public class SocketHandler2 extends AppCompatActivity {
     }
 
     public interface onJoinShelemRoomRecived{
-        void onReciced(String onReciced);
+        void onStatusReciced(Boolean onReciced);
+        void onPlayerReciced(Player player);
+        void onCaptionReciced(String onReciced);
     }
 
     public interface onLeftShelemRoomRecived{
@@ -334,7 +321,7 @@ public class SocketHandler2 extends AppCompatActivity {
     ///////////////////////
 
     public interface onGetUpdatePlayerShelemLobby{
-        void onRecieved(Player player);
+        void onPlayerReciced(Player player);
     }
 
 }
