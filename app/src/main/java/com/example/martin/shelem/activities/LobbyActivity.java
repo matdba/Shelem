@@ -33,7 +33,6 @@ public class LobbyActivity extends SocketActivity {
     private TextView[] playersUsernames = new TextView[4];
     private CardView closeImg;
 
-    UserDetails userDetails;
     Player[] players;
 
     private int socketRoomID, playerNumber;
@@ -58,10 +57,8 @@ public class LobbyActivity extends SocketActivity {
 
         closeImg = findViewById(R.id.btn_close);
 
-        userDetails = new UserDetails(this);
-
-        playersAvatars[0].setImageResource(AvatarHandler.fetchAvatar(this, userDetails.getAvatarNumber()));
-        playersUsernames[0].setText(userDetails.getUsername());
+        playersAvatars[0].setImageResource(AvatarHandler.fetchAvatar(this, UserDetails.getAvatarNumber()));
+        playersUsernames[0].setText(UserDetails.getUsername());
         playersUsernames[0].setTextColor(getResources().getColor(R.color.carbon_lightGreen_a400));
         playersAvatars[0].setAlpha(1f);
 
@@ -83,7 +80,7 @@ public class LobbyActivity extends SocketActivity {
 
 
 
-        SocketService.findRoom(userDetails.getUserID(), userDetails.getUsername(), String.valueOf(userDetails.getAvatarNumber()),
+        SocketService.findRoom(UserDetails.getUserID(), UserDetails.getUsername(), String.valueOf(UserDetails.getAvatarNumber()),
                 (socketRoomID, playerNumber, jsonArray) -> runOnUiThread(() -> {
             players[0] = new Player();
             this.socketRoomID = socketRoomID;

@@ -10,7 +10,7 @@ public class Room {
 
     @SerializedName("roomID")
     @Expose
-    private Integer roomID;
+    private String roomID;
     @SerializedName("roomStatus")
     @Expose
     private Integer roomStatus;
@@ -30,11 +30,11 @@ public class Room {
     @Expose
     private List<Player> players = null;
 
-    public Integer getRoomID() {
+    public String getRoomID() {
         return roomID;
     }
 
-    public void setRoomID(Integer roomID) {
+    public void setRoomID(String roomID) {
         this.roomID = roomID;
     }
 

@@ -40,7 +40,6 @@ public class GameScreenActivity extends SocketActivity implements MenuGameScreen
 
     // custom classes-----------------------------------------------------
     CardsHandler cardsHandler;
-    UserDetails userDetails;
     CardViewHandler cardViewHandler;
     SocketService socketService;
     CountDownTimer countDownTimer;
@@ -68,8 +67,6 @@ public class GameScreenActivity extends SocketActivity implements MenuGameScreen
 
         timerProgress = findViewById(R.id.progress_timer);
         timerTxt = findViewById(R.id.txt_timer);
-
-        userDetails = new UserDetails(this);
         cardsHandler = new CardsHandler();
 
         cardViewHandler = new CardViewHandler(this);

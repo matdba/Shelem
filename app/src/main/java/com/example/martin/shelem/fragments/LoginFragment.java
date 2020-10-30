@@ -44,7 +44,6 @@ public class LoginFragment extends Fragment implements IActivityResponse {
     private SpinKitView loginProgressbar;
 
 
-    private APIHandler apiHandler;
     private UnitHandler unitHandler;
 
     private final String usernamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.]*";
@@ -67,7 +66,6 @@ public class LoginFragment extends Fragment implements IActivityResponse {
         passwordEtErrorImg = view.findViewById(R.id.img_error_et_password);
 
 
-        apiHandler = new APIHandler(getActivity());
         unitHandler = new UnitHandler(getActivity());
 
         unitHandler.setViewsHeightAndWidth(loginLbl, unitHandler.getPixels(200), unitHandler.getPixels(50));
@@ -116,7 +114,7 @@ public class LoginFragment extends Fragment implements IActivityResponse {
                 errorMessageTxt.setVisibility(View.INVISIBLE);
                 loginTxt.setVisibility(View.INVISIBLE);
                 loginProgressbar.setVisibility(View.VISIBLE);
-                apiHandler.login(usernameEt.getText().toString(), passwordEt.getText().toString(), response -> {
+                APIHandler.login(usernameEt.getText().toString(), passwordEt.getText().toString(), response -> {
                     loginTxt.setVisibility(View.VISIBLE);
                     loginProgressbar.setVisibility(View.INVISIBLE);
                     if (response.equals("success")) {

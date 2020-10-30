@@ -8,6 +8,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Player  {
 
+    @SerializedName("mmr")
+    @Expose
+    private Integer mmr = 1000;
+
     @SerializedName("roomID")
     @Expose
     private Integer roomID;
@@ -17,12 +21,12 @@ public class Player  {
     @SerializedName("username")
     @Expose
     private String username;
-    @SerializedName("profilePictureNum")
+    @SerializedName("avatarNumber")
     @Expose
-    private Integer profilePictureNum;
-    @SerializedName("totalxp")
+    private Integer avatarNumber;
+    @SerializedName("totalXp")
     @Expose
-    private Integer totalxp;
+    private Integer totalXp;
     @SerializedName("totalMatches")
     @Expose
     private Integer totalMatches;
@@ -64,19 +68,19 @@ public class Player  {
     }
 
     public Integer getProfilePictureNum() {
-        return profilePictureNum;
+        return avatarNumber;
     }
 
-    public void setProfilePictureNum(Integer profilePictureNum) {
-        this.profilePictureNum = profilePictureNum;
+    public void setProfilePictureNum(Integer avatarNumber) {
+        this.avatarNumber = avatarNumber;
     }
 
-    public Integer getTotalxp() {
-        return totalxp;
+    public Integer getTotalXp() {
+        return totalXp;
     }
 
-    public void setTotalxp(Integer totalxp) {
-        this.totalxp = totalxp;
+    public void setTotalXp(Integer totalxp) {
+        this.totalXp = totalxp;
     }
 
     public Integer getTotalMatches() {
@@ -118,6 +122,11 @@ public class Player  {
     public void setPlayerNumber(Integer playerNumber) {
         this.playerNumber = playerNumber;
     }
+
+
+    public Integer getMmr() { return mmr; }
+
+    public void setMmr(Integer mmr) { this.mmr = mmr; }
 
 
 }

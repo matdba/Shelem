@@ -59,14 +59,18 @@ public class SocketHandler2 extends AppCompatActivity {
            public void call(Object... args) {
                JSONObject jsonObject = null;
                Gson gson = new Gson();
+               Room room = null;
                try {
                    jsonObject = new JSONObject(args[0].toString());
+                   if (jsonObject.get("status").equals("true")) {
+                       room = gson.fromJson(jsonObject.get("room").toString(), Room.class);
+                       onRoomsRecived.onRoomReciced(room);
+
+                   } else onRoomsRecived.onCaptionReciced(jsonObject.get("caption").toString());
                } catch (JSONException e) {
                    e.printStackTrace();
                }
-               Room room = gson.fromJson(jsonObject.toString(), Room.class);
 
-               onRoomsRecived.onReciced(room);
            }
        });
     }
@@ -80,25 +84,24 @@ public class SocketHandler2 extends AppCompatActivity {
                 Gson gson = new Gson();
                 try {
                     jsonObject = new JSONObject(args[0].toString());
-
-                    Log.i("yoo", "call: " + jsonObject.toString());
                     if (!jsonObject.get("status").equals("true")) {
                         onJoinShelemRoomRecived.onStatusReciced(false);
                         onJoinShelemRoomRecived.onCaptionReciced(jsonObject.get("caption").toString());
-
+                        onJoinShelemRoomRecived.onStartGameReciced(false);
                     } else {
                         onJoinShelemRoomRecived.onPlayerReciced(gson.fromJson(jsonObject.get("player").toString(), Player.class));
                         onJoinShelemRoomRecived.onStatusReciced(true);
+                        if (jsonObject.get("startGame").equals("true")) onJoinShelemRoomRecived.onStartGameReciced(true);
+                        else onJoinShelemRoomRecived.onStartGameReciced(false);
 
                     }
                 } catch (JSONException e) { e.printStackTrace(); }
 
             }
         });
-
     }
 
-    public static void leftShelemRoom(final int roomID, final int userID,final int playerNumber,final onLeftShelemRoomRecived onLeftShelemRoomRecived){
+    public static void leftShelemRoom(final String roomID, final int userID,final int playerNumber,final onLeftShelemRoomRecived onLeftShelemRoomRecived){
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("roomID",roomID);
@@ -128,7 +131,7 @@ public class SocketHandler2 extends AppCompatActivity {
 
     public static void updatePlayerShelemLobby(final onGetUpdatePlayerShelemLobby onGetUpdatePlayerShelemLobby){
 
-        socket.on("userJoined", new Emitter.Listener() {
+        socket.on("updateLobby", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
                 Gson gson = new Gson();
@@ -138,6 +141,8 @@ public class SocketHandler2 extends AppCompatActivity {
                     Log.i("top", "call: " + args[0].toString());
                     if (jsonObject.get("status").equals("true")){
                         onGetUpdatePlayerShelemLobby.onPlayerReciced(gson.fromJson(jsonObject.get("player").toString(), Player.class));
+                        if (jsonObject.get("startGmae").equals("true")) onGetUpdatePlayerShelemLobby.onStartGameReciced(true);
+                        else onGetUpdatePlayerShelemLobby.onStartGameReciced(false);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -145,6 +150,37 @@ public class SocketHandler2 extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static void createShelemRoom(JSONObject player,String maxPoint,String isJoker ,final onCreateShelemRoomListener onCreateShelemRoomListener){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("isJoker",isJoker);
+            jsonObject.put("maxPoint",maxPoint);
+            jsonObject.put("player",player);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        socket.emit("createShelemRoom",jsonObject, new Ack() {
+            JSONObject jsonObject = null;
+            Gson gson = new Gson();
+            @Override
+            public void call(final Object... args) {
+                try {
+                    jsonObject = new JSONObject(args[0].toString());
+                    if (jsonObject.get("status").equals("true")) {
+                        onCreateShelemRoomListener.onRoomRecived(gson.fromJson(jsonObject.get("room").toString(), Room.class));
+                        onCreateShelemRoomListener.onCreateRoomRecived(true);
+                    } else {
+                        onCreateShelemRoomListener.onCreateRoomRecived(false);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
 
@@ -214,55 +250,6 @@ public class SocketHandler2 extends AppCompatActivity {
         });
     }
 
-    public static void setStartGameShelem(final onShelemStartGameListener onShelemStartGameListener){
-        socket.on("startGame", new Emitter.Listener() {
-            @Override
-            public void call(final Object... args) {
-                if (args[0].toString().equals("true")){
-                    onShelemStartGameListener.onRecived("true");
-                } else {
-                    onShelemStartGameListener.onRecived("false");
-                }
-            }
-        });
-    }
-
-    public static void createShelemRoom(String name,String minLevel,String maxPoint, final onCreateShelemRoomListener onCreateShelemRoomListener){
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("name",name);
-            jsonObject.put("minlevel",minLevel);
-            jsonObject.put("maxpoint",maxPoint);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        socket.emit("CreateRoomShelem",jsonObject, new Ack() {
-            @Override
-            public void call(final Object... args) {
-                if (args[0].toString().equals("false")) {
-                    onCreateShelemRoomListener.onRecived("Room Already Exists");
-                } else {
-                    onCreateShelemRoomListener.onRecived("Room Created");
-                }
-            }
-        });
-    }
-
-    public static void checkStartGame(String roomId,String game) {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("roomType",game);
-            jsonObject.put("roomId", roomId);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        socket.emit("checkStartGame",jsonObject);
-    }
-
-
-
 
 
 
@@ -275,53 +262,34 @@ public class SocketHandler2 extends AppCompatActivity {
 
 
     public interface onGetRoomsRecived{
-        void onReciced(Room room);
+        void onRoomReciced(Room room);
+        void onCaptionReciced(String onReciced);
     }
 
     public interface onJoinShelemRoomRecived{
         void onStatusReciced(Boolean onReciced);
         void onPlayerReciced(Player player);
         void onCaptionReciced(String onReciced);
+        void onStartGameReciced(Boolean onReciced);
     }
 
     public interface onLeftShelemRoomRecived{
         void onReciced(String onReciced);
     }
 
-    public interface onLobbyRecived{
-        void onReciced(JSONObject jsonObject) throws JSONException;
-    }
-
-    public interface onShelemStartGameListener{
-        void onRecived(String onRecived);
-    }
-
-    public interface onUserDisconnectListener{
-        void onRecived(String onRecived);
-    }
-
     public interface onCreateShelemRoomListener{
-        void onRecived(String onRecived);
+        void onCreateRoomRecived(Boolean onRecived);
+        void onRoomRecived(Room onRecived);
     }
 
     public interface onGetRecentGame{
         void onRevived(List<RecentGameRooms> recentGameRoomList);
     }
 
-
-    public interface updateRoomsListener{
-        void onRecieved(List<Room> roomList);
-    }
-
-
-    public interface deleteRoomListener{
-        void onDeleted(String response);
-    }
-
-    ///////////////////////
-
     public interface onGetUpdatePlayerShelemLobby{
         void onPlayerReciced(Player player);
+        void onStartGameReciced(Boolean onReciced);
+
     }
 
 }

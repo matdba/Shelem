@@ -22,13 +22,11 @@ public class RecentGamesAdapter extends RecyclerView.Adapter<RecentGamesAdapter.
 
 
     private Context context;
-    UserDetails userDetails;
     int green,liver;
     private List<RecentGameRooms> recentGameRoomsList;
 
     public RecentGamesAdapter(Context context, List<RecentGameRooms>recentGameRoomsList){
         this.context = context;
-        userDetails = new UserDetails(context);
         this.recentGameRoomsList = recentGameRoomsList;
         green = context.getResources().getColor(R.color.green);
         liver = context.getResources().getColor(R.color.liver);
@@ -41,12 +39,6 @@ public class RecentGamesAdapter extends RecyclerView.Adapter<RecentGamesAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RecentGamesHoldler recentGamesHoldler, int i) {
-//        RecentGameRooms room = recentGameRoomsList.get(i);
-//        recentGamesHoldler.playerOne.setImageDrawable(context.getResources().getDrawable(room.getPerson1().getProfilePic()));
-//        recentGamesHoldler.playerTwo.setImageDrawable(context.getResources().getDrawable(room.getPerson2().getProfilePic()));
-//        recentGamesHoldler.playerThree.setImageDrawable(context.getResources().getDrawable(room.getPerson3().getProfilePic()));
-//        recentGamesHoldler.playerFour.setImageDrawable(context.getResources().getDrawable(room.getPerson4().getProfilePic()));
-//        recentGamesHoldler.point.setText(room.getPointTeemOne() + " - " + room.getPointTeemTwo());
 
         if (i % 2 == 0) {
             recentGamesHoldler.condition.setImageResource(R.drawable.ic_win);

@@ -44,7 +44,6 @@ public class SignupFragment extends Fragment {
     private RelativeLayout nextBackBtnContainer;
     private TextView signupBtn;
 
-    private APIHandler apiHandler;
     private AnimationHandler animationHandler;
     private UnitHandler unitHandler;
 
@@ -91,7 +90,6 @@ public class SignupFragment extends Fragment {
 
 
 
-        apiHandler = new APIHandler(getActivity());
         unitHandler = new UnitHandler(getActivity());
         animationHandler = new AnimationHandler(getActivity());
 
@@ -264,7 +262,7 @@ public class SignupFragment extends Fragment {
                     usernameEtErrorMessageTxt.setVisibility(View.VISIBLE);
                     usernameEtErrorMessageTxt.setText("username can't be less than 4");
                 } else {
-                    apiHandler.checkUsernameAvailibility(s.toString(), response -> {
+                    APIHandler.checkUsernameAvailibility(s.toString(), response -> {
                         if (response.equals("error")) {
                             usernameOk = false;
                             usernameEtProgressbar.setVisibility(View.INVISIBLE);
@@ -355,7 +353,7 @@ public class SignupFragment extends Fragment {
 
 
 
-        signupBtn.setOnClickListener(v -> apiHandler.signUp(usernameEt.getText().toString(), passwordEt.getText().toString(), emailEt.getText().toString(), inviteCodeEt.getText().toString(),
+        signupBtn.setOnClickListener(v -> APIHandler.signUp(usernameEt.getText().toString(), passwordEt.getText().toString(), emailEt.getText().toString(), inviteCodeEt.getText().toString(),
                 response -> {
                     if (response.equals("success")) {
                         getActivity().startActivity(new Intent(getActivity(), DashboardActivity.class));

@@ -69,8 +69,6 @@ public class DashboardActivity extends BaseActivity {
 
     //declare classes---------------------------------------------------------------------------
     DisplayMetrics displayMetrics;
-    UserDetails userDetails;
-    APIHandler apiHandler;
     RecentGamesAdapter recentGamesAdapter;
     RelativeLayout.LayoutParams moreContainerLayoutParams;
     UnitHandler unitHandler;
@@ -123,12 +121,10 @@ public class DashboardActivity extends BaseActivity {
 
 
         displayMetrics = new DisplayMetrics();
-        userDetails = new UserDetails(this);
-        apiHandler = new APIHandler(this);
         unitHandler = new UnitHandler(this);
         moreContainerLayoutParams = (RelativeLayout.LayoutParams) moreContainer.getLayoutParams();
         recentGameRoomsList = new ArrayList<>();
-        SocketHandler2.init(userDetails.getUserID());
+        SocketHandler2.init(UserDetails.getUserID());
 
         recentGameRoomsList.add(new RecentGameRooms());
         recentGameRoomsList.add(new RecentGameRooms());
@@ -163,8 +159,8 @@ public class DashboardActivity extends BaseActivity {
         OverScrollDecoratorHelper.setUpOverScroll(scrollView);
 
 
-        usernameTxt.setText(userDetails.getUsername());
-        avatarImg.setImageResource(AvatarHandler.fetchAvatar(this, userDetails.getAvatarNumber()));
+        usernameTxt.setText(UserDetails.getUsername());
+        avatarImg.setImageResource(AvatarHandler.fetchAvatar(this, UserDetails.getAvatarNumber()));
     }
 
 
@@ -230,7 +226,7 @@ public class DashboardActivity extends BaseActivity {
 
 
         logoutBtn.setOnClickListener(v -> {
-            userDetails.removeUserInfo();
+            UserDetails.removeUserInfo();
             startActivity(new Intent(DashboardActivity.this, LoginSignupActivity.class));
             finish();
         });
@@ -252,7 +248,7 @@ public class DashboardActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1) {
-            avatarImg.setImageResource(AvatarHandler.fetchAvatar(this, userDetails.getAvatarNumber()));
+            avatarImg.setImageResource(AvatarHandler.fetchAvatar(this, UserDetails.getAvatarNumber()));
         }
     }
 

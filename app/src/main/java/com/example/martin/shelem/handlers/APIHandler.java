@@ -13,7 +13,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.martin.shelem.activities.BaseActivity;
+import com.example.martin.shelem.instances.Player;
 import com.example.martin.shelem.instances.Room;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,8 +27,7 @@ import java.util.Map;
 
 public class APIHandler {
 
-    private Activity activity;
-    private UserDetails userDetails;
+    private static Activity activity;
 
     private static final String urlAPIHandler = "http://barahoueibk.ir/shelem/APIHandler.php";
 
@@ -33,26 +35,25 @@ public class APIHandler {
 
 
 
-    public APIHandler(Activity activity) {
-        this.activity = activity;
+    public static void init () {
+
+        activity = BaseActivity.activity;
+
     }
 
 
 
 
 
-    public void login(final String username, final String password, final ResponseListenerLogin responseListenerLogin) {
+    public static void login(final String username, final String password, final ResponseListenerLogin responseListenerLogin) {
 
         final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
                 response -> {
 
                     if (!response.trim().equals("error")) {
-                        Log.i("kireboz", "login: " + response);
-                        userDetails = new UserDetails(activity);
                         try {
-                            userDetails.saveUserInfo(new JSONArray(response.trim()).getJSONObject(0));
+                            UserDetails.saveUserInfo(new JSONArray(response.trim()).getJSONObject(0));
                         } catch (JSONException e) {
-                            Log.i("kireboz", "login: " + e);
                             e.printStackTrace();
                         }
                         responseListenerLogin.onRecived("success");
@@ -83,14 +84,14 @@ public class APIHandler {
 
 
 
-    public void signUp(final String username, final String password, final String email, final String refcode, final ResponseListenerSignUp responseListenerSignUp) {
+    public static void signUp(final String username, final String password, final String email, final String refcode, final ResponseListenerSignUp responseListenerSignUp) {
 
         final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
                 response -> {
                     if (response.trim().split("_")[0].equals("success")) {
                         responseListenerSignUp.onRecived("success");
                         try {
-                            userDetails.saveUserInfo(new JSONObject(response.trim().split("_")[1]));
+                            UserDetails.saveUserInfo(new JSONObject(response.trim().split("_")[1]));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -125,7 +126,7 @@ public class APIHandler {
 
 
 
-    public void checkUsernameAvailibility (final String username, final ResponseListenerCheckUsernameAvailibility responseListenerCheckUsernameAvailibility) {
+    public static void checkUsernameAvailibility (final String username, final ResponseListenerCheckUsernameAvailibility responseListenerCheckUsernameAvailibility) {
 
         final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
                 response -> responseListenerCheckUsernameAvailibility.onRecived(response), error -> {
@@ -152,7 +153,7 @@ public class APIHandler {
 
 
 
-    public void checkEmailAvailibility (final String email, final ResponseListenerCheckEmailAvailibility responseListenerCheckEmailAvailibility) {
+    public static void checkEmailAvailibility (final String email, final ResponseListenerCheckEmailAvailibility responseListenerCheckEmailAvailibility) {
 
         final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
                 response -> responseListenerCheckEmailAvailibility.onRecived(response), error -> {
@@ -179,9 +180,7 @@ public class APIHandler {
 
 
 
-
-
-    public void updateAvatarNumber(final String userID, final String avatarNumber, final ResponseListenerSignUp responseListenerSignUp) {
+    public static void updateAvatarNumber(final String userID, final String avatarNumber, final ResponseListenerSignUp responseListenerSignUp) {
 
         final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
                 response -> {
@@ -215,8 +214,7 @@ public class APIHandler {
 
 
 
-
-    public void getForgetCode(final String email, final ResponseListenerForgetCode responseListenerForgetCode) {
+    public static void getForgetCode(final String email, final ResponseListenerForgetCode responseListenerForgetCode) {
 
         final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
                 response -> {
@@ -249,7 +247,7 @@ public class APIHandler {
 
 
 
-    public void updateForgetCode(final String username,final ResponseListenerUpdateForgetCode responseListenerUpdateForgetCode) {
+    public static void updateForgetCode(final String username,final ResponseListenerUpdateForgetCode responseListenerUpdateForgetCode) {
 
         final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
                 response -> {
@@ -282,7 +280,7 @@ public class APIHandler {
 
 
 
-    public void updatePassword(final String username,final String password ,final ResponseListenerUpdatePassword responseListenerUpdatePassword) {
+    public static void updatePassword(final String username,final String password ,final ResponseListenerUpdatePassword responseListenerUpdatePassword) {
 
         final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
                 response -> {
@@ -316,7 +314,7 @@ public class APIHandler {
 
 
 
-    public void updateCheckInvitation(final String username, final String callerUsername,final ResponseListenerUpdateCheckInvitation responseListenerUpdateCheckInvitation) {
+    public static void updateCheckInvitation(final String username, final String callerUsername,final ResponseListenerUpdateCheckInvitation responseListenerUpdateCheckInvitation) {
 
         final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
                 response -> {
@@ -349,7 +347,7 @@ public class APIHandler {
 
 
 
-    public void getInvitation(final String username, final String callerUsername,final ResponseListenerGetInvitation responseListenerGetInvitation) {
+    public static void getInvitation(final String username, final String callerUsername,final ResponseListenerGetInvitation responseListenerGetInvitation) {
 
         final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
                 response -> {
@@ -384,48 +382,22 @@ public class APIHandler {
 
 
 
+    public static void updatePlayer (final Player player, final ResponseListenerUpdatePlayer responseListenerUpdatePlayer) {
 
-
-    public void createRoom(final String userID, final String isJoker, final String minLevel, final String maxPoint, final APIHandler.ResponseListenerCreateShelemRooms responseListenerCreateShelemRooms) {
         final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
-                response -> {
-                    if (response.trim().split("_")[0].equals("success")) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response.split("_")[1]);
-                            Room room = new Room();
-                            room.setRoomID(Integer.parseInt(jsonObject.getString("roomID")));
-                            room.setRoomStatus(Integer.parseInt(jsonObject.getString("roomStatus")));
-                            room.setIsJoker(Boolean.parseBoolean(jsonObject.getString("isJoker")));
-                            room.setMaxPoint(Integer.parseInt(jsonObject.getString("maxPoint")));
-                            room.setTeamOnePoints(0);
-                            room.setTeamTwoPoints(0);
-                            responseListenerCreateShelemRooms.onRecived("success");
-                            responseListenerCreateShelemRooms.onDataRecieved(room);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    } else {
-                        responseListenerCreateShelemRooms.onRecived(response);
+                response -> responseListenerUpdatePlayer.onStatusRecived(true), error -> {
+                    if (error instanceof NoConnectionError) {
+                        responseListenerUpdatePlayer.onCaptionRecived("NoConnectionError");
+                        responseListenerUpdatePlayer.onStatusRecived(false);
                     }
-
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if (error instanceof NoConnectionError) {
-                    responseListenerCreateShelemRooms.onRecived("NoConnectionError");
-                }
-            }
-        }) {
+                }) {
             @Override
             protected Map<String, String> getParams() {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("method", "createRoom");
-                params.put("userID", userID);
-                params.put("isJoker", isJoker);
-                params.put("minLevel", minLevel);
-                params.put("maxPoint", maxPoint);
+                Gson gson = new Gson();
+                params.put("method", "updatePlayer");
+                params.put("player", gson.toJson(player, Player.class));
                 return params;
             }
         };
@@ -433,44 +405,6 @@ public class APIHandler {
         RequestQueue requestQueue = Volley.newRequestQueue(activity);
         requestQueue.add(request);
     }
-
-
-
-
-
-
-
-
-    public void insertPlayer(final String roomId, final String playerId, final String playerNumber, final APIHandler.ResponseListenerInsertShelemPlayer responseListenerInsertShelemPlayer) {
-
-        final StringRequest request = new StringRequest(Request.Method.POST, urlAPIHandler,
-                response -> {
-                    if (response.trim().equals("success")) {
-                        responseListenerInsertShelemPlayer.onRecived("success");
-                    } else {
-                        responseListenerInsertShelemPlayer.onRecived(response);
-                    }
-                }, error -> {
-            if (error instanceof NoConnectionError) {
-                responseListenerInsertShelemPlayer.onRecived("NoConnectionError");
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<>();
-                params.put("method", "insertPlayer");
-                params.put("roomID", roomId);
-                params.put("userID", playerId);
-                params.put("playerNumber", playerNumber);
-                return params;
-            }
-        };
-        request.setRetryPolicy(new DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        RequestQueue requestQueue = Volley.newRequestQueue(activity);
-        requestQueue.add(request);
-    }
-
 
 
 
@@ -511,14 +445,10 @@ public class APIHandler {
         void onRecived(String response);
     }
 
+    public interface ResponseListenerUpdatePlayer {
+        void onCaptionRecived(String response);
+        void onStatusRecived(Boolean response);
 
-    public interface ResponseListenerCreateShelemRooms {
-        void onRecived(String response);
-        void onDataRecieved(Room room);
-    }
-
-    public interface ResponseListenerInsertShelemPlayer{
-        void onRecived(String response);
     }
 
 }

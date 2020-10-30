@@ -34,7 +34,6 @@ public class ProfileActivity extends BaseActivity implements CloseFragmentListen
 
 
     UnitHandler unitHandler;
-    UserDetails userDetails;
     double heightEdit , heightEditClose;
 
     int preScrollY = 0;
@@ -54,15 +53,14 @@ public class ProfileActivity extends BaseActivity implements CloseFragmentListen
         avatarFragmentContainer = findViewById(R.id.container_avatars_fragment);
 
         unitHandler = new UnitHandler(this);
-        userDetails = new UserDetails(this);
 
         heightEdit = unitHandler.getPixels(300);
         heightEditClose = unitHandler.getPixels(250);
 
         header.bringToFront();
 
-        usernameTxt.setText(userDetails.getUsername());
-        avatarImg.setImageResource(AvatarHandler.fetchAvatar(this, userDetails.getAvatarNumber()));
+        usernameTxt.setText(UserDetails.getUsername());
+        avatarImg.setImageResource(AvatarHandler.fetchAvatar(this, UserDetails.getAvatarNumber()));
 
 
 
@@ -190,7 +188,7 @@ public class ProfileActivity extends BaseActivity implements CloseFragmentListen
     @Override
     public void onFragmentClosed() {
         avatarFragmentContainer.setVisibility(View.INVISIBLE);
-        avatarImg.setImageResource(AvatarHandler.fetchAvatar(this, userDetails.getAvatarNumber()));
+        avatarImg.setImageResource(AvatarHandler.fetchAvatar(this, UserDetails.getAvatarNumber()));
     }
 
     @Override

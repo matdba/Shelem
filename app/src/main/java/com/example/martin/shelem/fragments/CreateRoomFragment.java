@@ -1,6 +1,7 @@
 package com.example.martin.shelem.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,16 @@ import com.example.martin.shelem.handlers.UserDetails;
 import com.example.martin.shelem.instances.Room;
 import com.example.martin.shelem.interfaces.CloseFragmentListener;
 import com.example.martin.shelem.utils.UnitHandler;
+import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import carbon.widget.TextView;
 
@@ -35,8 +40,6 @@ public class CreateRoomFragment extends Fragment {
 
 
     private UnitHandler unitHandler;
-    private APIHandler apiHandler;
-    private UserDetails userDetails;
     private CloseFragmentListener closeFragmentListener;
 
     private int point = 300;
@@ -63,8 +66,6 @@ public class CreateRoomFragment extends Fragment {
 
 
         unitHandler = new UnitHandler(getActivity());
-        apiHandler = new APIHandler(getActivity());
-        userDetails = new UserDetails(getActivity());
         closeFragmentListener = (CloseFragmentListener) getActivity();
 
     }
@@ -161,24 +162,28 @@ public class CreateRoomFragment extends Fragment {
         createRoombtn.setOnClickListener(v -> {
             createRoombtn.setClickable(false);
 
-            apiHandler.createRoom(userDetails.getUserID(), String.valueOf(joker), String.valueOf(minLevel), String.valueOf(point), new APIHandler.ResponseListenerCreateShelemRooms() {
-                @Override
-                public void onRecived(String response) {
+            SocketHandler2.createShelemRoom(UserDetails.getAllDetails(), String.valueOf(point), String.valueOf(joker), new SocketHandler2.onCreateShelemRoomListener() {
 
-                    if (response.equals("success")) {
-                        SocketHandler2.socket.emit("createRoom");
-                        getFragmentManager().popBackStack();
-                        closeFragmentListener.onFragmentClosed();
-                    } else {
-                        createRoombtn.setClickable(true);
-                        Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
-                    }
+                @Override
+                public void onRoomRecived(Room onRecived) {
+
+                    LobbyFragment lobbyFragment = new LobbyFragment();
+                    Bundle bundle = new Bundle();
+                    Gson gson = new Gson();
+                    bundle.putString("room", gson.toJson(onRecived, Room.class));
+                    bundle.putString("fromCreateRoom","true");
+                    lobbyFragment.setArguments(bundle);
+                    getActivity().findViewById(R.id.container_fragment_lobby).setVisibility(View.VISIBLE);
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, lobbyFragment).addToBackStack("lobby").commit();
+
                 }
 
                 @Override
-                public void onDataRecieved(Room room) {
-                    closeFragmentListener.onFragmentClosedAction(room);
+                public void onCreateRoomRecived(Boolean onRecived) {
+
                 }
+
+
             });
         });
 

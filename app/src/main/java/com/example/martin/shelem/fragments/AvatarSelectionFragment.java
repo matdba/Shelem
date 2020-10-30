@@ -29,8 +29,6 @@ public class AvatarSelectionFragment extends Fragment implements AvatarsAdapter.
     private CloseFragmentListener closeFragmentListener;
 
 
-    private APIHandler apiHandler;
-    private UserDetails userDetails;
     private AvatarsAdapter avatarsAdapter;
 
     private String selectedAvatarNumber = "0";
@@ -46,14 +44,12 @@ public class AvatarSelectionFragment extends Fragment implements AvatarsAdapter.
 
         closeFragmentListener = (CloseFragmentListener) getActivity();
 
-        apiHandler = new APIHandler(getActivity());
-        userDetails = new UserDetails(getActivity());
 
 
-        avatarsAdapter = new AvatarsAdapter(getActivity(), this, userDetails.getAvatarNumber());
+        avatarsAdapter = new AvatarsAdapter(getActivity(), this, UserDetails.getAvatarNumber());
         avatarsRv.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         avatarsRv.setAdapter(avatarsAdapter);
-        selectedAvatarImg.setImageResource(AvatarHandler.fetchAvatar(getActivity(), userDetails.getAvatarNumber()));
+        selectedAvatarImg.setImageResource(AvatarHandler.fetchAvatar(getActivity(), UserDetails.getAvatarNumber()));
         OverScrollDecoratorHelper.setUpOverScroll(avatarsRv, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
     }
 
@@ -78,10 +74,10 @@ public class AvatarSelectionFragment extends Fragment implements AvatarsAdapter.
 
 
         submitBtn.setOnClickListener(v ->
-            apiHandler.updateAvatarNumber(userDetails.getUserID(), selectedAvatarNumber, response -> {
+            APIHandler.updateAvatarNumber(UserDetails.getUserID(), selectedAvatarNumber, response -> {
                 if (response.equals("success")) {
                     getFragmentManager().popBackStack();
-                    userDetails.setAvatarNumber(Integer.parseInt(selectedAvatarNumber));
+                    UserDetails.setAvatarNumber(Integer.parseInt(selectedAvatarNumber));
                     closeFragmentListener.onFragmentClosed();
                 } else { Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show(); }
             }));

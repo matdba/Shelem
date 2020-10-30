@@ -36,16 +36,27 @@ public class RoomsActivity extends BaseActivity implements CloseFragmentListener
         addRoomImg = findViewById(R.id.img_add_room);
 
 
-        SocketHandler2.getRoom("70" , room -> RoomsActivity.this.runOnUiThread(() -> {
-            LobbyFragment lobbyFragment = new LobbyFragment();
-            Bundle bundle = new Bundle();
-            Gson gson = new Gson();
-            bundle.putString("room", gson.toJson(room, Room.class));
 
-            lobbyFragment.setArguments(bundle);
-            findViewById(R.id.container_fragment_lobby).setVisibility(View.VISIBLE);
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, lobbyFragment).addToBackStack("lobby").commit();
-        }));
+        SocketHandler2.getRoom("70", new SocketHandler2.onGetRoomsRecived() {
+            @Override
+            public void onRoomReciced(Room room) {
+
+                LobbyFragment lobbyFragment = new LobbyFragment();
+                Bundle bundle = new Bundle();
+                Gson gson = new Gson();
+                bundle.putString("room", gson.toJson(room, Room.class));
+                bundle.putString("fromCreateRoom","false");
+                lobbyFragment.setArguments(bundle);
+                RoomsActivity.this.findViewById(R.id.container_fragment_lobby).setVisibility(View.VISIBLE);
+                RoomsActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment_lobby, lobbyFragment).addToBackStack("lobby").commit();
+
+            }
+
+            @Override
+            public void onCaptionReciced(String onReciced) {
+
+            }
+        });
 
 
         backImg.setOnClickListener(v -> finish());

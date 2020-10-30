@@ -93,7 +93,7 @@ public class LoginSignupActivity extends BaseActivity implements IFragmentRespon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_signup);
 
-        if (new UserDetails(this).isLoggedIN()) {
+        if (UserDetails.isLoggedIN()) {
             startActivity(new Intent(LoginSignupActivity.this, DashboardActivity.class));
             finish();
         }

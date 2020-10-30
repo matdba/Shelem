@@ -18,6 +18,6 @@ public class SocketActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         //SocketService.init(new UserDetails(this).getUserID());
 
-        SocketService.init(new UserDetails(this).getUserID());
+        SocketService.init(UserDetails.getUserID());
     }
 }

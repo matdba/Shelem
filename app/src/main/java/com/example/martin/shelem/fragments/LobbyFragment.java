@@ -43,7 +43,6 @@ public class LobbyFragment extends Fragment {
     private TextView[] playersUsernames = new TextView[4];
     private CardView closeImg;
 
-    private UserDetails userDetails;
     private Room room;
 
     private boolean sit;
@@ -72,12 +71,11 @@ public class LobbyFragment extends Fragment {
 
         closeImg = view.findViewById(R.id.btn_close);
 
-
+        if (getArguments().getString("fromCreateRoom").equals("true")) sit = true;
         String strtext = getArguments().getString("room");
         Gson gson = new Gson();
         room = gson.fromJson(strtext, Room.class);
 
-        userDetails = new UserDetails(getContext());
 
         for (int i = 0; i < 4; i++) {
             CurvedLine curvedLine = new CurvedLine(getActivity(), null);
@@ -87,7 +85,6 @@ public class LobbyFragment extends Fragment {
         }
 
 
-//        fromCreateRoomFragment = getArguments().getBoolean("fromCreateRoomFragment", false);
 
 
         maxPointTxt.setText(String.valueOf(room.getMaxPoint()));
@@ -131,38 +128,26 @@ public class LobbyFragment extends Fragment {
         });
 
 
+        playersAvatars[0].setOnClickListener(view -> LobbyFragment.this.sitPlayer(1));
 
+        playersAvatars[1].setOnClickListener(view -> { sitPlayer(2); });
 
-        playersAvatars[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LobbyFragment.this.sitPlayer(1);
-            }
-        });
+        playersAvatars[2].setOnClickListener(view -> { sitPlayer(3); });
 
-        playersAvatars[1].setOnClickListener(view -> {
-            sitPlayer(2);
-        });
-
-        playersAvatars[2].setOnClickListener(view -> {
-            sitPlayer(3);
-        });
-
-        playersAvatars[3].setOnClickListener(view -> {
-            sitPlayer(4);
-        });
-
-
+        playersAvatars[3].setOnClickListener(view -> { sitPlayer(4); });
 
         SocketHandler2.updatePlayerShelemLobby(new SocketHandler2.onGetUpdatePlayerShelemLobby() {
             @Override
             public void onPlayerReciced(Player player) {
                 setPlayer(player);
             }
+            @Override
+            public void onStartGameReciced(Boolean onReciced){
+                if (onReciced){
+                    Log.i("startbazi", "onCaptionReciced: " + "start Gmae");
+                }
+            }
         });
-
-
-
 
 
         return view;
@@ -174,7 +159,6 @@ public class LobbyFragment extends Fragment {
 
             playersAvatars[players.get(i).getPlayerNumber() - 1].setImageResource(AvatarHandler.fetchAvatar(BaseActivity.activity, players.get(i).getProfilePictureNum()));
             playersUsernames[players.get(i).getPlayerNumber() - 1].setText(players.get(i).getUsername());
-
         }
 
     }
@@ -200,7 +184,7 @@ public class LobbyFragment extends Fragment {
 
         if (canSit(playerNumber)) {
             myNumber = playerNumber;
-            JSONObject jsonObject = userDetails.getAllDetails();
+            JSONObject jsonObject = UserDetails.getAllDetails();
             try {
                 jsonObject.put("playerStatus", 0);
                 jsonObject.put("playerNumber", playerNumber);
@@ -224,7 +208,12 @@ public class LobbyFragment extends Fragment {
                     //Toast.makeText(getActivity(),onReciced,Toast.LENGTH_LONG).show();
                     Log.i("boz", "onCaptionReciced: " + onReciced);
                 }
-
+                @Override
+                public void onStartGameReciced(Boolean onReciced){
+                    if (onReciced){
+                        Log.i("startbazi", "onCaptionReciced: " + "start Gmae");
+                    }
+                }
             });
 
         }
@@ -233,11 +222,10 @@ public class LobbyFragment extends Fragment {
 
     private void getUp(int number){
 
-        if (number != 0) {
-            SocketHandler2.leftShelemRoom(room.getRoomID(), Integer.parseInt(userDetails.getUserID()), number, onReciced -> {
+        if (number != 0)
+            SocketHandler2.leftShelemRoom(room.getRoomID(), Integer.parseInt(UserDetails.getUserID()), number, onReciced -> {
             });
 
-        }
     }
 
 

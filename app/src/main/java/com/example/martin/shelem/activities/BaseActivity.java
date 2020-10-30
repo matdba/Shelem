@@ -1,20 +1,29 @@
 package com.example.martin.shelem.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.martin.shelem.handlers.APIHandler;
+import com.example.martin.shelem.handlers.UserDetails;
+
 public class BaseActivity extends AppCompatActivity {
 
     public static Activity activity;
+    public static Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
+        context = getBaseContext();
+
+        UserDetails.init(context);
+        APIHandler.init();
 
         enableImmersiveMode();
     }
